@@ -14,12 +14,12 @@ class AppMenuScreen extends StatefulWidget {
 class _AppMenuScreenState extends State<AppMenuScreen> {
 
   int _currentIndex = 0;
-  final listIndexName = ["classe","resultats","soutien"];
+  final listIndexName = ["accueil","classe","resultats"];
 
   final _kBottomNavItems = <BottomNavigationBarItem>[
+    const BottomNavigationBarItem(icon: Icon(Icons.home),label: "Accueil"),
     const BottomNavigationBarItem(icon: Icon(Icons.table_chart_rounded),label: "Classe"),
     const BottomNavigationBarItem(icon: Icon(Icons.area_chart),label: "Résultats"),
-    const BottomNavigationBarItem(icon: Icon(Icons.forum),label: "Soutien"),
   ];
 
   @override

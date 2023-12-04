@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../screens/app_menu_screen/app_menu_screen.dart';
+import '../screens/home_screen/home_screen.dart';
 import '../screens/inscription_screen/inscription_screen.dart';
 import '../screens/loading_screen/loading_screen.dart';
 import '../screens/option_screen/option_screen.dart';
@@ -18,7 +19,7 @@ final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>(d
 
 class RouteClass {
   static final GoRouter router = GoRouter(
-    initialLocation: "/",
+    initialLocation: "/option",
     navigatorKey: _rootNavigatorKey,
     routes: <RouteBase>[
       GoRoute(
@@ -63,6 +64,13 @@ class RouteClass {
               return AppMenuScreen(child: child);
             },
             routes: <RouteBase>[
+              GoRoute(
+                path: 'accueil',
+                pageBuilder: (context, state) => NoTransitionPage<void>(
+                    key: state.pageKey,
+                    child: HomeScreen()
+                ),
+              ),
               GoRoute(
                 path: 'classe',
                 pageBuilder: (context, state) => NoTransitionPage<void>(

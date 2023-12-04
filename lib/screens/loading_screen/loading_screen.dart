@@ -16,7 +16,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     if (widget.redirection != null ) {
       context.go("${widget.redirection}");
     } else {
-      context.go("/app-menu/classe");
+      context.go("/app-menu/accueil");
     }
   }
 

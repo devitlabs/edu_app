@@ -33,8 +33,13 @@ class _CardRessourceState extends State<CardRessource> {
                 children: [
                   Text(widget.title,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
                   const SizedBox(height: 5,),
-                  const Text("However, it's unlikely that your normal operating system username already has an associated PostgreSQL username. So usually, you'll need to log into P",
-                    style: TextStyle(fontStyle: FontStyle.italic,fontSize: 14),overflow: TextOverflow.ellipsis,maxLines: 8,),
+                  Container(
+                    height: 120,
+                    child: const Text(
+                      "However, it's unlikely that your normal operating system username already has an associated PostgreSQL username. So usually, you'll need to log into Pv fgkf  kkgdfg",
+                      style: TextStyle(fontStyle: FontStyle.italic, fontSize: 14),overflow: TextOverflow.fade,
+                    ),
+                  ),
                 ],
               )
               )
