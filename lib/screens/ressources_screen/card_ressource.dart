@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CardRessource extends StatefulWidget {
+  final int id;
   final String title;
-  const CardRessource({super.key, required this.title});
+  final String description;
+  final String imagePath;
+  const CardRessource({super.key, required this.title, required this.id, required this.description, required this.imagePath});
 
   @override
   State<CardRessource> createState() => _CardRessourceState();
@@ -23,7 +26,7 @@ class _CardRessourceState extends State<CardRessource> {
               SizedBox(
                 height: 150,
                 width: 150,
-                child: Image.network("http://164.160.33.223/assets/images/document/Devoirs.jpeg",
+                child: Image.network(widget.imagePath,
                   fit: BoxFit.fill,),
               ),
               const SizedBox(width: 5,),
@@ -35,9 +38,7 @@ class _CardRessourceState extends State<CardRessource> {
                   const SizedBox(height: 5,),
                   Container(
                     height: 120,
-                    child: const Text(
-                      "However, it's unlikely that your normal operating system username already has an associated PostgreSQL username. So usually, you'll need to log into Pv fgkf  kkgdfg",
-                      style: TextStyle(fontStyle: FontStyle.italic, fontSize: 14),overflow: TextOverflow.fade,
+                    child: Text(widget.description,style: TextStyle(fontStyle: FontStyle.italic, fontSize: 14),overflow: TextOverflow.fade,
                     ),
                   ),
                 ],
@@ -50,9 +51,10 @@ class _CardRessourceState extends State<CardRessource> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            OutlinedButton(onPressed: (){}, child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text("Voir les détails"),
+            OutlinedButton(onPressed: (){
+              print(widget.id);
+            },
+              child: const Padding(padding: EdgeInsets.symmetric(horizontal: 20), child: Text("Voir les détails"),
             ),),
             OutlinedButton(style: OutlinedButton.styleFrom(
                 foregroundColor: Colors.red
