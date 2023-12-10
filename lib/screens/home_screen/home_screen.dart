@@ -36,32 +36,32 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           SizedBox(height: 20,),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                HomeButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",),
-                HomeButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",),
-                HomeButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",)
-              ]
-          ),
-          SizedBox(height: 10,),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                HomeButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",),
-                HomeButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",),
-                HomeButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",)
-              ]
-          ),
-          SizedBox(height: 10,),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                HomeButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",),
-                Container(),
-                Container()
-              ]
-          ),
+          // Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       HomeButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",),
+          //       HomeButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",),
+          //       HomeButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",)
+          //     ]
+          // ),
+          // SizedBox(height: 10,),
+          // Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       HomeButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",),
+          //       HomeButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",),
+          //       HomeButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",)
+          //     ]
+          // ),
+          // SizedBox(height: 10,),
+          // Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       HomeButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",),
+          //       Container(),
+          //       Container()
+          //     ]
+          // ),
         ],
       ),
     );

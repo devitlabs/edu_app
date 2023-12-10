@@ -19,7 +19,7 @@ final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>(d
 
 class RouteClass {
   static final GoRouter router = GoRouter(
-    initialLocation: "/option",
+    initialLocation: "/",
     navigatorKey: _rootNavigatorKey,
     routes: <RouteBase>[
       GoRoute(
@@ -32,12 +32,6 @@ class RouteClass {
         path: '/login',
         builder: (BuildContext context, GoRouterState state) {
           return const LoginScreen();
-        },
-      ),
-      GoRoute(
-        path: '/option',
-        builder: (BuildContext context, GoRouterState state) {
-          return const OptionScreen();
         },
       ),
       GoRoute(

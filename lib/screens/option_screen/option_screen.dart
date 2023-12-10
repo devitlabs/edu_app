@@ -10,6 +10,9 @@ class OptionScreen extends StatefulWidget {
 }
 
 class _OptionScreenState extends State<OptionScreen> {
+
+  bool? estEleve = null;
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -24,6 +27,9 @@ class _OptionScreenState extends State<OptionScreen> {
               child: Stack(
                 children: [
                   Image.asset('assets/images/img_option1.png'),
+                  IconButton(onPressed: (){
+                    context.go("/login");
+                  }, icon: Icon(Icons.arrow_back,color: Colors.white,size: 25,)),
                   Positioned(
                     left: -hCircle/2+width/2,
                       top: 100,
@@ -43,16 +49,50 @@ class _OptionScreenState extends State<OptionScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 30,),
-            Text("Choisissez votre profil",style: TextStyle(color: primaryColor,fontSize:16 ),),
+            SizedBox(height: 20,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Text("Commençons ! Veuillez choisir votre de type de profil : Encadreur ou Elève.",style: TextStyle(color: Colors.black,fontSize:16 ),),
+            ),
             SizedBox(height: 30,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                OptionButton(name: "Elève",onTap: (){ context.go("/login"); },image: "assets/icons/student.png",),
-                OptionButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",)
+                OptionButton(name: "Elève",onTap: (){
+                  setState(() {
+                    estEleve = true;
+                  });
+                },image: "assets/icons/student.png",),
+                OptionButton(name: "Encardreur",onTap: (){
+                  setState(() {
+                    estEleve = false;
+                  });
+                },image: "assets/icons/teacher.png",)
               ]
-            )
+            ),
+            const SizedBox(height: 20,),
+            if (estEleve != null ) Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Vous avez choisi le profil : ",style: TextStyle(fontSize: 16)),
+                Text(estEleve == true ? "Elève" : "Encardreur",style: TextStyle(fontSize: 16,color: primaryColor),),
+              ],
+            ),
+            Expanded(child: Container()),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: OutlinedButton(
+                  onPressed: estEleve == null ? null : (){
+                    // if (estEleve != null ) {
+                    //   inscriptionController.inscriptionModel.value.typeProfil = estEleve == true ? "Elève" : "Encardreur" ;
+                    //   context.go("/inscription/step-2");
+                    // }
+                  },
+                  child: Container(height: 40, width: double.infinity,
+                    child: Center(child: Text("Suivant",style: TextStyle(fontSize: 16),)),
+                  )),
+            ),
+            SizedBox(height: 10,)
           ],
         ),
       ),

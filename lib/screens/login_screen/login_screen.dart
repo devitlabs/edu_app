@@ -81,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double hCircle = 150;
+    double hCircle = 150; 
     return SafeArea(
       child: Scaffold(
         body: Column(

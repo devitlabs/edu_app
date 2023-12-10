@@ -18,7 +18,7 @@ class _AppMenuScreenState extends State<AppMenuScreen> {
 
   final _kBottomNavItems = <BottomNavigationBarItem>[
     const BottomNavigationBarItem(icon: Icon(Icons.home),label: "Accueil"),
-    const BottomNavigationBarItem(icon: Icon(Icons.table_chart_rounded),label: "Classe"),
+    const BottomNavigationBarItem(icon: Icon(Icons.table_chart_rounded),label: "Ma Classe"),
     const BottomNavigationBarItem(icon: Icon(Icons.area_chart),label: "Résultats"),
   ];
 

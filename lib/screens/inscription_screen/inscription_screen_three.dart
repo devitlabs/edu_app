@@ -1,8 +1,11 @@
 import 'package:edu_app/constants/colors.dart';
-import 'package:edu_app/screens/login_screen/login_screen.dart';
+import 'package:edu_app/core/api_client.dart';
+import 'package:edu_app/models/inscription_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../controllers/inscription_controller.dart';
 
 class InscriptionScreenThree extends StatefulWidget {
   const InscriptionScreenThree({super.key});
@@ -12,21 +15,45 @@ class InscriptionScreenThree extends StatefulWidget {
 }
 
 class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
-  late final TextEditingController _emailController;
+
   late final TextEditingController _passwordController;
+  late final TextEditingController _matriculeController;
+  bool checkPremium = false;
+  bool _obscureText = false;
+
+  DateTime? selectedDate ;
+
+  final _formKey = GlobalKey<FormState>();
+
+  final InscriptionController inscriptionController = Get.find();
 
   @override
   void initState() {
-    _emailController = TextEditingController();
     _passwordController = TextEditingController();
+    _matriculeController = TextEditingController();
     super.initState();
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime(2013),
+      firstDate: DateTime(1970),
+      lastDate: DateTime(2013),
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
+        child: Form(
+          key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,20 +118,18 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 16,),
+                      SizedBox(height: 10,),
                       Container(
-                        height: 40,
+                        height: 70,
                         child: TextFormField(
                           validator: (value) {
-                            if (value == null ||
-                                value.isEmpty ||
-                                ! GetUtils.isEmail(value)) {
-                              return 'Svp veuillez entrer un e-mail correct.';
+                            if (value == null || value.isEmpty || value.length < 9 ) {
+                              return "Le champ renseigné est incorrect";
                             }
                             return null;
                           },
                           decoration: InputDecoration(
-                              hintText: "Mot de passe",
+                              hintText: "Matricule",
                               contentPadding: const EdgeInsets.only(
                                   left: 20.0,
                                   right: 20.0),
@@ -115,18 +140,64 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                                           context)
                                           .primaryColor,
                                       width: 2))),
-                          controller: _emailController,
+                          controller: _matriculeController,
                         ),
                       ),
-                      SizedBox(height: 16,),
+                      SizedBox(height: 5,),
                       Container(
-                        height: 40,
+                        height: 50,
+                        width: double.infinity,
+                        child: Row(
+                          children: [
+                            Text("Date de naissance : ${formatDate(selectedDate)}"),
+                            IconButton(onPressed: (){
+                              _selectDate(context);
+                            }, icon: Icon(Icons.date_range))
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 5,),
+                      Container(
+                        height: 70,
                         child: TextFormField(
+                          obscureText: _obscureText,
                           validator: (value) {
-                            if (value == null ||
-                                value.isEmpty ||
-                                ! GetUtils.isEmail(value)) {
-                              return 'Svp veuillez entrer un e-mail correct.';
+                            if (value == null || value.isEmpty || value.length <= 6) {
+                              return 'Le mot de passe doit avoir au moins de 6 chiffres.';
+                            }
+                            return null;
+                          },
+                          decoration: InputDecoration(
+                              hintText: "Mot de passe",
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _obscureText = !_obscureText;
+                                  });
+                                },
+                                child: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+                              ),
+                              contentPadding: const EdgeInsets.only(
+                                  left: 20.0,
+                                  right: 20.0),
+                              border: OutlineInputBorder(),
+                              focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(
+                                          context)
+                                          .primaryColor,
+                                      width: 2))),
+                          controller: _passwordController,
+                        ),
+                      ),
+                      SizedBox(height: 5,),
+                      Container(
+                        height: 70,
+                        child: TextFormField(
+                          obscureText: _obscureText,
+                          validator: (value) {
+                            if (value == null || value.isEmpty || value != _passwordController.text ) {
+                              return 'Les mot de passe ne sont pas identiques.';
                             }
                             return null;
                           },
@@ -135,57 +206,51 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                               contentPadding: const EdgeInsets.only(
                                   left: 20.0,
                                   right: 20.0),
-                              border: OutlineInputBorder(),
+                              border: const OutlineInputBorder(),
                               focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: Theme.of(
                                           context)
                                           .primaryColor,
                                       width: 2))),
-                          controller: _emailController,
                         ),
                       ),
-                      SizedBox(height: 16,),
+                      SizedBox(height: 5,),
                       Row(
                         children: [
-                          Checkbox(value: false, onChanged: (value){},activeColor: secondaryColor,),
+                          Checkbox(value: checkPremium,splashRadius: 10, onChanged: (value){
+                            if (value != null ) {
+                              setState(() {
+                                checkPremium = value;
+                              });
+                            }
+                          },activeColor: secondaryColor,),
                           SizedBox(width: 10,),
                           Text("Abonnement Premium",style: TextStyle(color: secondaryColor),)
                         ],
                       ),
                       Expanded(child: Container()),
                       InkWell(
-                        onTap: (){
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) => AlertDialog(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)
-                                ),
-                                content: Container(
-                                  width: 270,
-                                  height: 200,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20)
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      SizedBox(height: 10),
-                                      Image.asset("assets/images/congrats.png",width: 60,height: 60,),
-                                      SizedBox(height: 10),
-                                      Text("Félicitions vous faites parti(e)s"),
-                                      Text("de la famille 13.Edu"),
-                                      SizedBox(height: 10),
-                                      TextButton(
-                                          onPressed: (){
-                                            context.go("/login");
-                                          },
-                                          child: Text("Connectez-vous maintenant"))
-                                    ],
-                                  ),
-                                ),
-                              )
-                          );
+                        onTap: () async {
+                          if (_formKey.currentState!.validate() ) {
+                            inscriptionController.inscriptionModel.value.motPasse = _passwordController.text;
+                            inscriptionController.inscriptionModel.value.estPremium = checkPremium;
+                            inscriptionController.inscriptionModel.value.matricule = _matriculeController.text;
+                            inscriptionController.inscriptionModel.value.dateNaissance = formatDate(selectedDate);
+                            final result = await ApiClient.createUtilisateur(utilisateur: inscriptionController.inscriptionModel.value);
+                            if (result) {
+                              showSucces();
+                            } else {
+                              const snackBar = SnackBar(
+                                backgroundColor: Colors.red,
+                                content: Text("Une erreur est survenue lors de la création de votre compte."),
+                                duration: Duration(seconds: 3), // Set the duration for the SnackBar
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            }
+
+                          }
+
                         },
                         child: Container(
                           width: double.infinity,
@@ -194,7 +259,7 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                               color: primaryColor,
                               borderRadius: BorderRadius.circular(10)
                           ),
-                          child: Center(
+                          child: const Center(
                             child: Text(
                               "SOUMETTRE",
                               style: TextStyle(fontSize: 16,color: Colors.white),
@@ -213,4 +278,54 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
       ),
     );
   }
+
+  String formatDate(DateTime? date ) {
+    if (date == null ) {
+      return "";
+    }
+
+    String day = date.day < 10 ? "0${date.day}" :"${date.day}";
+    String month = date.month < 10 ? "0${date.month}" :"${date.month}";
+
+    return "${day}/${month}/${date.year}";
+  }
+
+  void showSucces() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20)
+          ),
+          content: Container(
+            width: 270,
+            height: 200,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20)
+            ),
+            child: Column(
+              children: [
+                SizedBox(height: 10),
+                Image.asset("assets/images/congrats.png",width: 60,height: 60,),
+                SizedBox(height: 10),
+                Text("Félicitions vous faites parti(e)s"),
+                Text("de la famille 13.Edu"),
+                SizedBox(height: 10),
+                TextButton(
+                    onPressed: (){
+                      _passwordController.clear();
+                      selectedDate = null;
+                      _matriculeController.clear();
+                      inscriptionController.inscriptionModel.value = InscriptionModel.init();
+                      context.go("/login");
+                    },
+                    child: Text("Connectez-vous maintenant"))
+              ],
+            ),
+          ),
+        )
+    );
+  }
+
 }
