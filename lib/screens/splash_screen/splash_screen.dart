@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../controllers/auth_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,9 +15,18 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
+  final AuthController authController = Get.find();
+
   void initialisation() async {
     await Future.delayed(const Duration(seconds: 3));
-    context.go("/login");
+    const storage = FlutterSecureStorage();
+    final String? loggedIn = await storage.read(key: "estConnecte");
+    if (loggedIn == "true") {
+      context.go("/app-menu/accueil");
+    } else {
+      context.go("/login");
+    }
+
   }
 
   @override

@@ -1,6 +1,12 @@
 import 'package:edu_app/constants/colors.dart';
+import 'package:edu_app/core/api_client.dart';
+import 'package:edu_app/models/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../controllers/auth_controller.dart';
 
 class DrawerMenu extends StatefulWidget {
   const DrawerMenu({super.key});
@@ -10,6 +16,18 @@ class DrawerMenu extends StatefulWidget {
 }
 
 class _DrawerMenuState extends State<DrawerMenu> {
+
+  late final UserModel _user;
+
+  final AuthController authController = Get.find();
+
+  @override
+  void initState() {
+    _user = authController.user.value;
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -29,13 +47,13 @@ class _DrawerMenuState extends State<DrawerMenu> {
                     child: Image.asset("assets/images/person_image.png",height: 80,width: 80,),
                   ),
                 ),
-                const Expanded(child: Column(
+                Expanded(child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("HOUESSOU  HUEHANOU FABRICE ",style: TextStyle(fontSize: 16,color: Colors.white),),
+                    Text("${_user.nom} ${_user.prenoms}",style: TextStyle(fontSize: 16,color: Colors.white),),
                     SizedBox(height: 5,),
-                    Text("+ 225 0757360442 ",style: TextStyle(color: Colors.white)),
+                    Text("+225 0757360442 ",style: TextStyle(color: Colors.white)),
                     SizedBox(height: 5,),
                     Row(
                       children: [
@@ -78,15 +96,18 @@ class _DrawerMenuState extends State<DrawerMenu> {
           Expanded(child: Container()),
           Center(
             child: OutlinedButton(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text("Se déconnecter",style: TextStyle(fontSize: 16,color: Colors.white),),
-              ),
-              onPressed: (){
+              onPressed: () async {
+                const storage = FlutterSecureStorage();
+                authController.user.value = UserModel.init();
+                await storage.deleteAll();
                 context.go("/login");
               },
               style: OutlinedButton.styleFrom(
-                backgroundColor: Color(0xFFE45726)
+                backgroundColor: const Color(0xFFE45726)
+              ),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Text("Se déconnecter",style: TextStyle(fontSize: 16,color: Colors.white),),
               ),
             ),
           ),

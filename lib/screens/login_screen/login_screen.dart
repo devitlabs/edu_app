@@ -2,8 +2,12 @@ import 'package:edu_app/constants/colors.dart';
 import 'package:edu_app/core/api_client.dart';
 import 'package:edu_app/screens/inscription_screen/inscription_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../controllers/auth_controller.dart';
+import '../../models/user_model.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,6 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   late final TextEditingController _loginController;
   late final TextEditingController _passwordController;
+
+  final AuthController authController = Get.find();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -51,6 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void login() async {
+    const storage = FlutterSecureStorage();
     setState(() {
       _isLoading = true;
     });
@@ -61,6 +68,15 @@ class _LoginScreenState extends State<LoginScreen> {
         final message = result["status"]["message"];
         _showErrorDialog(context,message);
       } else {
+        authController.user.value = UserModel.fromJson(result["items"][0]);
+        DateTime date = DateTime.now();
+        DateTime futureTime = date.add(const Duration(minutes: 25));
+
+        await storage.write(key: "estConnecte", value: "true");
+        await storage.write(key: "expiration", value: futureTime.toString());
+        await storage.write(key: "login", value: "${_loginController.text}");
+        await storage.write(key: "motPasse", value: "${_passwordController.text}");
+        
         context.go("/app-menu");
       }
     } else {

@@ -2,6 +2,7 @@ import 'package:edu_app/screens/inscription_screen/inscription_screen_three.dart
 import 'package:edu_app/screens/inscription_screen/inscription_screen_two.dart';
 import 'package:edu_app/screens/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 
 import '../screens/app_menu_screen/app_menu_screen.dart';
@@ -10,6 +11,7 @@ import '../screens/inscription_screen/inscription_screen.dart';
 import '../screens/loading_screen/loading_screen.dart';
 import '../screens/option_screen/option_screen.dart';
 import '../screens/ressources_screen/ressource_screen.dart';
+import '../screens/simulateur_orientation_screen/simulateur_orientation_screen.dart';
 import '../screens/splash_screen/splash_screen.dart';
 import '../screens/class_screen/class_screen.dart';
 import '../screens/subject_screen/subject_screen.dart';
@@ -38,6 +40,12 @@ class RouteClass {
         path: '/ressources',
         builder: (BuildContext context, GoRouterState state) {
           return const RessourceScreen();
+        },
+      ),
+      GoRoute(
+        path: '/simulateur-orientation',
+        builder: (BuildContext context, GoRouterState state) {
+          return const SimulateurOrientationScreen();
         },
       ),
       GoRoute(
@@ -111,5 +119,28 @@ class RouteClass {
         ]
       ),
     ],
+    redirect: (BuildContext context, GoRouterState state) async {
+      const storage = FlutterSecureStorage();
+      final String? loggedIn = await storage.read(key: "estConnecte");
+      final String? expiration = await storage.read(key: "expiration");
+      final DateTime dateNow = DateTime.now();
+      final DateTime? dateExpiration = expiration != null ? DateTime.parse(expiration) : null;
+
+      if (loggedIn != "true" || loggedIn == null || dateExpiration == null ) {
+        return '/login';
+      }
+
+      // if ( dateNow.isBefore(dateExpiration) ) {
+      //   Duration difference = dateNow.difference(dateExpiration);
+      //   int minutes = difference.inMinutes;
+      //   if ( minutes < 5 ){
+      //     DateTime futureTime = dateNow.add(const Duration(minutes: 25));
+      //     await storage.write(key: "expiration", value: futureTime.toString());
+      //   }
+      //   return '/login';
+      // }
+
+      return null;
+    },
   );
 }

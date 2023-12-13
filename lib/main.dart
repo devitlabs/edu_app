@@ -1,8 +1,12 @@
 import 'package:edu_app/constants/colors.dart';
 import 'package:edu_app/routes/route_class.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'controllers/auth_controller.dart';
 
 void main() async{
+  Get.put(AuthController());
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
