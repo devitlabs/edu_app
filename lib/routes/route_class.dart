@@ -37,9 +37,9 @@ class RouteClass {
         },
       ),
       GoRoute(
-        path: '/ressources',
+        path: '/blog',
         builder: (BuildContext context, GoRouterState state) {
-          return const RessourceScreen();
+          return const BlogScreen();
         },
       ),
       GoRoute(
@@ -70,7 +70,7 @@ class RouteClass {
                 path: 'accueil',
                 pageBuilder: (context, state) => NoTransitionPage<void>(
                     key: state.pageKey,
-                    child: HomeScreen()
+                    child: const HomeScreen()
                 ),
               ),
               GoRoute(
@@ -125,6 +125,14 @@ class RouteClass {
       final String? expiration = await storage.read(key: "expiration");
       final DateTime dateNow = DateTime.now();
       final DateTime? dateExpiration = expiration != null ? DateTime.parse(expiration) : null;
+
+      print(state.fullPath);
+
+      final path = state.fullPath;
+
+      if ( path !=null && path.contains("inscription")) {
+        return null;
+      }
 
       if (loggedIn != "true" || loggedIn == null || dateExpiration == null ) {
         return '/login';

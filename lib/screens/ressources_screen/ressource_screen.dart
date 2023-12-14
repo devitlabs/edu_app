@@ -5,14 +5,14 @@ import 'package:go_router/go_router.dart';
 import 'ressource_post_bac.dart';
 import 'ressource_six_tle.dart';
 
-class RessourceScreen extends StatefulWidget {
-  const RessourceScreen({super.key});
+class BlogScreen extends StatefulWidget {
+  const BlogScreen({super.key});
 
   @override
-  State<RessourceScreen> createState() => _RessourceScreenState();
+  State<BlogScreen> createState() => _BlogScreenState();
 }
 
-class _RessourceScreenState extends State<RessourceScreen> {
+class _BlogScreenState extends State<BlogScreen> {
 
   final _kTabs = <Tab>[
     const Tab(text: 'Calculateur'),
@@ -26,7 +26,7 @@ class _RessourceScreenState extends State<RessourceScreen> {
       length: _kTabs.length,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Ressources"),
+          title: const Text("Blog - Ressources"),
           leading: IconButton(
               onPressed: () {
                 context.go("/app-menu");

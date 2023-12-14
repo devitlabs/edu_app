@@ -2,7 +2,7 @@ import 'dart:convert';
 
 class InscriptionModel {
   String? typeProfil;
-  String?nom;
+  String? nom;
   String? prenom;
   String? ville;
   String? numeroTelephone;

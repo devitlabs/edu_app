@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:edu_app/constants/colors.dart';
 import 'package:edu_app/screens/inscription_screen/inscription_screen_three.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,10 @@ class InscriptionScreenTwo extends StatefulWidget {
 }
 
 class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
+
+  String? login = null;
+  final a = Random().nextInt(9);
+  final b = Random().nextInt(9);
   late final TextEditingController _nomController;
   late final TextEditingController _prenomController;
   late final TextEditingController _telController;
@@ -126,9 +132,33 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                                               .primaryColor,
                                           width: 2))),
                               controller: _nomController,
+                              onChanged: (value){
+                                setState(() {
+                                  setState(() {
+                                    login = "${value}${a}${b}";
+                                  });
+                                });
+                              },
                             ),
                           ),
-                          SizedBox(height: 5,),
+                          SizedBox(height: 4,),
+                          Container(
+                            width: double.infinity,
+                            height: 50,
+                            alignment: Alignment.centerLeft,
+                            decoration: BoxDecoration(
+                                color: Colors.grey.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(10)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 20.0),
+                              child: Text(
+                                "${login}",
+                                style: TextStyle(fontSize: 18,color: secondaryColor,fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 15,),
                           Container(
                             height: 70,
                             child: TextFormField(

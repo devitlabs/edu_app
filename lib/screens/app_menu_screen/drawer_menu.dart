@@ -76,9 +76,9 @@ class _DrawerMenuState extends State<DrawerMenu> {
             minVerticalPadding: 5,
             leading: Icon(Icons.book,size: 40,color: primaryColor,),
             onTap: () async {
-              context.go("/ressources");
+              context.go("/blog");
             },
-            title: Text("Ressources",style: TextStyle(fontSize: 20,color: Color(0xFF000000).withOpacity(0.7)),),
+            title: Text("Blog",style: TextStyle(fontSize: 20,color: Color(0xFF000000).withOpacity(0.7)),),
           ),
           Divider(),
           ListTile(

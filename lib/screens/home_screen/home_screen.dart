@@ -32,8 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Text("Bienvenue dans 13.Edu",style: TextStyle(color: Colors.white,fontSize: 18),),
                 SizedBox(height: 5,),
-                Text("The standard Lorem Ipsum passag Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-                style: TextStyle(color: Colors.white,fontSize: 12),)
+                Text("13 Edu est une application permettant aux élèves d'avoir un suivi par leurs encadreurs. "
+                    "Vous y trouverez également de nombreuses ressources pour vous orienter au mieux dans vos études.",
+                style: TextStyle(color: Colors.white,fontSize: 14,fontStyle: FontStyle.italic),)
               ],
             ),
           ),
@@ -80,7 +81,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   image: "assets/icons/calculatrice.png",
                 ),
-                HomeButton(name: "Blog",onTap: (){},image: "assets/icons/bloguer.png",),
+                HomeButton(
+                  name: "Blog",
+                  onTap: (){
+                    context.go("/blog");
+                  },
+                  image: "assets/icons/bloguer.png",),
                 HomeButton(
                   name: "Soutien",
                   secondName: "scolaire",
@@ -90,23 +96,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ]
           ),
           SizedBox(height: 10,),
-          // Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       HomeButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",),
-          //       HomeButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",),
-          //       HomeButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",)
-          //     ]
-          // ),
-          // SizedBox(height: 10,),
-          // Row(
-          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          //     children: [
-          //       HomeButton(name: "Encardreur",onTap: (){},image: "assets/icons/teacher.png",),
-          //       Container(),
-          //       Container()
-          //     ]
-          // ),
         ],
       ),
     );

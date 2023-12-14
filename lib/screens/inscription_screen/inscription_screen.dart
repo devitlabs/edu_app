@@ -59,12 +59,12 @@ class _InscriptionScreenState extends State<InscriptionScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 20,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            const SizedBox(height: 20,),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.0),
               child: Text("Commençons ! Veuillez choisir votre de type de profil : Encadreur ou Elève.",style: TextStyle(color: Colors.black,fontSize:16 ),),
             ),
-            SizedBox(height: 30,),
+            const SizedBox(height: 30,),
             Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

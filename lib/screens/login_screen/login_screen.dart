@@ -216,7 +216,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             onTap: (){
                               context.go("/inscription");
                             },
-                            child: Text("Inscription",style: TextStyle(fontSize: 15,color: primaryColor),),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text("Inscription",style: TextStyle(fontSize: 15,color: primaryColor),),
+                            ),
                           ),
                         ],
                       ),
