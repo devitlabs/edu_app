@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         body: Column(
           children: [
-            Container(
+            SizedBox(
               height: 252,
               width: double.infinity,
               child: Stack(
@@ -129,16 +129,16 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Expanded(child: SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
                 child: Form(
                   key: _formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 5),
-                      Text("Connexion",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 5),
+                      const Text("Connexion",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
+                      const SizedBox(height: 10),
                       TextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty || value.length < 3 ) {
@@ -173,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             contentPadding: const EdgeInsets.only(
                                 left: 20.0,
                                 right: 20.0),
-                            border: OutlineInputBorder(),
+                            border: const OutlineInputBorder(),
                             focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Theme.of(
@@ -182,10 +182,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     width: 2))),
                         controller: _passwordController,
                       ),
-                      SizedBox(height:  10),
+                      const SizedBox(height:  10),
                       TextButton(onPressed: (){}, child: const Text(
                         "Mot de passe oublié ? ",style: TextStyle(color: Color(0xFFE45726)),)),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       InkWell(
                         onTap: _isLoading ? null : (){
                           if (_formKey.currentState!.validate()) {
