@@ -1,19 +1,17 @@
-import 'package:edu_app/constants/colors.dart';
-import 'package:edu_app/core/api_client.dart';
 import 'package:flutter/material.dart';
-
+import '../../constants/colors.dart';
+import '../../core/api_client.dart';
 import '../../models/document_model.dart';
-import 'card_ressource.dart';
+import 'card_blog.dart';
 
-class RessourcePostBAC extends StatefulWidget {
-  const RessourcePostBAC({super.key});
+class GestionConcours extends StatefulWidget {
+  const GestionConcours({super.key});
 
   @override
-  State<RessourcePostBAC> createState() => _RessourcePostBACState();
+  State<GestionConcours> createState() => _GestionConcoursState();
 }
 
-class _RessourcePostBACState extends State<RessourcePostBAC> {
-
+class _GestionConcoursState extends State<GestionConcours> {
   List<DocumentModel> documents = [];
   bool isLoading = true;
   bool status = false;
@@ -23,7 +21,7 @@ class _RessourcePostBACState extends State<RessourcePostBAC> {
       isLoading = true;
     });
     final result = await ApiClient.getDocuments();
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     if ( result != null && result != [] ) {
       setState(() {
         documents = result;
@@ -55,7 +53,7 @@ class _RessourcePostBACState extends State<RessourcePostBAC> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Aucune donnée"),
+            const Text("Aucune donnée"),
             SizedBox(height: 10,),
             IconButton(
               icon: const Icon(Icons.refresh,color: Colors.green,),
@@ -68,12 +66,12 @@ class _RessourcePostBACState extends State<RessourcePostBAC> {
       ) :  SingleChildScrollView(
         child: Column(
           children: documents.map(
-                  (doc) =>  CardRessource(
-                    title: doc.typeDocumensLibelle,
-                    id: doc.id,
-                    description: doc.description,
-                    imagePath: "http://164.160.33.223/assets/images/document/${doc.typeDocumensLibelle}.${doc.extension}",
-                  ),
+                (doc) =>  CardRessource(
+              title: doc.typeDocumensLibelle,
+              id: doc.id,
+              description: doc.description,
+              imagePath: "http://164.160.33.223/assets/images/document/${doc.typeDocumensLibelle}.${doc.extension}",
+            ),
           ).toList(),
         ),
       ),
@@ -81,8 +79,3 @@ class _RessourcePostBACState extends State<RessourcePostBAC> {
   }
 
 }
-
-
-
-
-

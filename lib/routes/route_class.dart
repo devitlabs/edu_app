@@ -6,12 +6,12 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 
 import '../screens/app_menu_screen/app_menu_screen.dart';
+import '../screens/blog_screen/blog_screen.dart';
 import '../screens/home_screen/home_screen.dart';
 import '../screens/inscription_screen/inscription_screen.dart';
 import '../screens/loading_screen/loading_screen.dart';
-import '../screens/option_screen/option_screen.dart';
-import '../screens/ressources_screen/ressource_screen.dart';
 import '../screens/simulateur_orientation_screen/simulateur_orientation_screen.dart';
+import '../screens/soutien_screen/soutien_screen.dart';
 import '../screens/splash_screen/splash_screen.dart';
 import '../screens/class_screen/class_screen.dart';
 import '../screens/subject_screen/subject_screen.dart';
@@ -46,6 +46,12 @@ class RouteClass {
         path: '/simulateur-orientation',
         builder: (BuildContext context, GoRouterState state) {
           return const SimulateurOrientationScreen();
+        },
+      ),
+      GoRoute(
+        path: '/soutien-scolaire',
+        builder: (BuildContext context, GoRouterState state) {
+          return const SoutienScreen();
         },
       ),
       GoRoute(
@@ -125,28 +131,23 @@ class RouteClass {
       final String? expiration = await storage.read(key: "expiration");
       final DateTime dateNow = DateTime.now();
       final DateTime? dateExpiration = expiration != null ? DateTime.parse(expiration) : null;
-
-      print(state.fullPath);
-
       final path = state.fullPath;
+      print("Date Now ${dateNow.toString()} Expiration ${dateExpiration.toString()}");
 
-      if ( path !=null && path.contains("inscription")) {
+      bool? isExpired ;
+      if (dateExpiration != null ) {
+        isExpired = dateNow.isAfter(dateExpiration);
+      }
+
+      print("isExpired : ${isExpired}");
+
+      if ( path !=null && path.contains("inscription") ) {
         return null;
       }
 
-      if (loggedIn != "true" || loggedIn == null || dateExpiration == null ) {
+      if ( loggedIn != "true" || loggedIn == null || isExpired == true) {
         return '/login';
       }
-
-      // if ( dateNow.isBefore(dateExpiration) ) {
-      //   Duration difference = dateNow.difference(dateExpiration);
-      //   int minutes = difference.inMinutes;
-      //   if ( minutes < 5 ){
-      //     DateTime futureTime = dateNow.add(const Duration(minutes: 25));
-      //     await storage.write(key: "expiration", value: futureTime.toString());
-      //   }
-      //   return '/login';
-      // }
 
       return null;
     },

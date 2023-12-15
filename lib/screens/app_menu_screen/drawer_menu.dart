@@ -51,11 +51,11 @@ class _DrawerMenuState extends State<DrawerMenu> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("${_user.nom} ${_user.prenoms}",style: TextStyle(fontSize: 16,color: Colors.white),),
-                    SizedBox(height: 5,),
-                    Text("+225 0757360442 ",style: TextStyle(color: Colors.white)),
-                    SizedBox(height: 5,),
-                    Row(
+                    Text("${_user.nom} ${_user.prenoms}",style: const TextStyle(fontSize: 16,color: Colors.white),),
+                    const SizedBox(height: 5,),
+                    const Text("+225 0757360442 ",style: TextStyle(color: Colors.white)),
+                    const SizedBox(height: 5,),
+                    const Row(
                       children: [
                         Text("Mon Profil : ",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)),
                         Text("Gratuit ",style: TextStyle(color: Color(0xFFBBBBBB),fontWeight: FontWeight.bold)),
@@ -68,30 +68,30 @@ class _DrawerMenuState extends State<DrawerMenu> {
           ),
           ListTile(
             minVerticalPadding: 5,
-            leading: Icon(Icons.school,size: 40,color: primaryColor,),
+            leading: const Icon(Icons.school,size: 40,color: primaryColor,),
             onTap: (){},
-            title: Text("13 Academy ",style: TextStyle(fontSize: 20,color: Color(0xFF000000).withOpacity(0.7)),),
+            title: Text("13 Academy ",style: TextStyle(fontSize: 20,color: const Color(0xFF000000).withOpacity(0.7)),),
           ),
           ListTile(
             minVerticalPadding: 5,
-            leading: Icon(Icons.book,size: 40,color: primaryColor,),
+            leading: const Icon(Icons.book,size: 40,color: primaryColor,),
             onTap: () async {
               context.go("/blog");
             },
-            title: Text("Blog",style: TextStyle(fontSize: 20,color: Color(0xFF000000).withOpacity(0.7)),),
+            title: Text("Blog",style: TextStyle(fontSize: 20,color: const Color(0xFF000000).withOpacity(0.7)),),
           ),
-          Divider(),
+          const Divider(),
           ListTile(
             minVerticalPadding: 5,
-            leading: Icon(Icons.help,size: 40,color: primaryColor,),
+            leading: const Icon(Icons.help,size: 40,color: primaryColor,),
             onTap: (){},
-            title: Text("Aide",style: TextStyle(fontSize: 20,color: Color(0xFF000000).withOpacity(0.7)),),
+            title: Text("Aide",style: TextStyle(fontSize: 20,color: const Color(0xFF000000).withOpacity(0.7)),),
           ),
           ListTile(
             minVerticalPadding: 5,
-            leading: Icon(Icons.star_rate_outlined,size: 40,color: primaryColor,),
+            leading: const Icon(Icons.star_rate_outlined,size: 40,color: primaryColor,),
             onTap: (){},
-            title: Text("Notez 13.Edu",style: TextStyle(fontSize: 20,color: Color(0xFF000000).withOpacity(0.7)),),
+            title: Text("Notez 13.Edu",style: TextStyle(fontSize: 20,color: const Color(0xFF000000).withOpacity(0.7)),),
           ),
           Expanded(child: Container()),
           Center(
@@ -111,7 +111,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
               ),
             ),
           ),
-          SizedBox(height: 20,)
+          const SizedBox(height: 20,)
         ],
       ),
     );

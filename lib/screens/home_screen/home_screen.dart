@@ -86,16 +86,19 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: (){
                     context.go("/blog");
                   },
-                  image: "assets/icons/bloguer.png",),
+                  image: "assets/icons/bloguer.png",
+                ),
                 HomeButton(
                   name: "Soutien",
                   secondName: "scolaire",
-                  onTap: (){},
+                  onTap: (){
+                    context.go("/soutien-scolaire");
+                  },
                   image: "assets/icons/materiel-scolaire.png",
                 )
               ]
           ),
-          SizedBox(height: 10,),
+          const SizedBox(height: 10,),
         ],
       ),
     );

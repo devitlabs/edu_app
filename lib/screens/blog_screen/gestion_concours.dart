@@ -1,18 +1,19 @@
+import 'package:edu_app/constants/colors.dart';
+import 'package:edu_app/core/api_client.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants/colors.dart';
-import '../../core/api_client.dart';
 import '../../models/document_model.dart';
-import 'card_ressource.dart';
+import 'card_blog.dart';
 
-class RessourceSixTle extends StatefulWidget {
-  const RessourceSixTle({super.key});
+class GestionPublications extends StatefulWidget {
+  const GestionPublications({super.key});
 
   @override
-  State<RessourceSixTle> createState() => _RessourceSixTleState();
+  State<GestionPublications> createState() => _GestionPublicationsState();
 }
 
-class _RessourceSixTleState extends State<RessourceSixTle> {
+class _GestionPublicationsState extends State<GestionPublications> {
+
   List<DocumentModel> documents = [];
   bool isLoading = true;
   bool status = false;
@@ -22,7 +23,7 @@ class _RessourceSixTleState extends State<RessourceSixTle> {
       isLoading = true;
     });
     final result = await ApiClient.getDocuments();
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     if ( result != null && result != [] ) {
       setState(() {
         documents = result;
@@ -54,8 +55,8 @@ class _RessourceSixTleState extends State<RessourceSixTle> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Aucune donnée"),
-            SizedBox(height: 10,),
+            const Text("Aucune donnée"),
+            const SizedBox(height: 10,),
             IconButton(
               icon: const Icon(Icons.refresh,color: Colors.green,),
               onPressed: () {
@@ -67,12 +68,12 @@ class _RessourceSixTleState extends State<RessourceSixTle> {
       ) :  SingleChildScrollView(
         child: Column(
           children: documents.map(
-                (doc) =>  CardRessource(
-              title: doc.typeDocumensLibelle,
-              id: doc.id,
-              description: doc.description,
-              imagePath: "http://164.160.33.223/assets/images/document/${doc.typeDocumensLibelle}.${doc.extension}",
-            ),
+                  (doc) =>  CardRessource(
+                    title: doc.typeDocumensLibelle,
+                    id: doc.id,
+                    description: doc.description,
+                    imagePath: "http://164.160.33.223/assets/images/document/${doc.typeDocumensLibelle}.${doc.extension}",
+                  ),
           ).toList(),
         ),
       ),
@@ -80,3 +81,8 @@ class _RessourceSixTleState extends State<RessourceSixTle> {
   }
 
 }
+
+
+
+
+

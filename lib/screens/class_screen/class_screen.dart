@@ -55,11 +55,11 @@ class _SubjectWidgetState extends State<SubjectWidget> {
               height: 50,
               decoration: BoxDecoration(color: widget.color,borderRadius: BorderRadius.circular(10)),
               child: Center(
-                child: Text("${widget.title[0].toUpperCase()}${widget.title[1].toUpperCase()}",style: TextStyle(fontSize: 18,color: Colors.white),),
+                child: Text("${widget.title[0].toUpperCase()}${widget.title[1].toUpperCase()}",style: const TextStyle(fontSize: 18,color: Colors.white),),
               ),
             ),
             const SizedBox(width: 10,),
-            Text("${widget.title}",style: TextStyle(fontSize: 22,color: Colors.black),)
+            Text("${widget.title}",style: const TextStyle(fontSize: 22,color: Colors.black),)
           ],
         ),
       ),

@@ -61,12 +61,12 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(onPressed: (){ context.go("/inscription/step-2"); },splashRadius: 20,icon: Icon(Icons.arrow_back)),
-                  Text("Inscription 3/3",style: TextStyle(fontSize: 22),),
-                  SizedBox(width: 20,)
+                  IconButton(onPressed: (){ context.go("/inscription/step-2"); },splashRadius: 20,icon: const Icon(Icons.arrow_back)),
+                  const Text("Inscription 3/3",style: TextStyle(fontSize: 22),),
+                  const SizedBox(width: 20,)
                 ],
               ),
-              SizedBox(height: 2,),
+              const SizedBox(height: 2,),
               Container(
                 width: double.infinity,
                 height: 5,
@@ -81,10 +81,10 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                   ],
                 ),
               ),
-              SizedBox(height: 5,),
+              const SizedBox(height: 5,),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
                   child: Column(
                     children: [
                       const Row(
@@ -95,15 +95,15 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                             style: TextStyle(fontSize: 16,color: secondaryColor),),
                         ],
                       ),
-                      SizedBox(height: 4,),
+                      const SizedBox(height: 4,),
                       Container(
                         width: 250,
                         height: 2,
-                        color: Color(0xFFD9D9D9),
+                        color: const Color(0xFFD9D9D9),
                       ),
-                      SizedBox(height: 4,),
-                      Text("Maintenant, veuillez charger une belle photo de vous.", style: TextStyle(color: Color(0xFFBBBBBB),fontSize: 15),),
-                      SizedBox(height: 8,),
+                      const SizedBox(height: 4,),
+                      const Text("Maintenant, veuillez charger une belle photo de vous.", style: TextStyle(color: Color(0xFFBBBBBB),fontSize: 15),),
+                      const SizedBox(height: 8,),
                       Container(
                         width: 80,
                         height: 80,
@@ -118,7 +118,7 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 10,),
+                      const SizedBox(height: 10,),
                       Container(
                         height: 70,
                         child: TextFormField(
@@ -133,7 +133,7 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                               contentPadding: const EdgeInsets.only(
                                   left: 20.0,
                                   right: 20.0),
-                              border: OutlineInputBorder(),
+                              border: const OutlineInputBorder(),
                               focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: Theme.of(
@@ -143,7 +143,7 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                           controller: _matriculeController,
                         ),
                       ),
-                      SizedBox(height: 5,),
+                      const SizedBox(height: 5,),
                       Container(
                         height: 50,
                         width: double.infinity,
@@ -152,11 +152,11 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                             Text("Date de naissance : ${formatDate(selectedDate)}"),
                             IconButton(onPressed: (){
                               _selectDate(context);
-                            }, icon: Icon(Icons.date_range))
+                            }, icon: const Icon(Icons.date_range))
                           ],
                         ),
                       ),
-                      SizedBox(height: 5,),
+                      const SizedBox(height: 5,),
                       Container(
                         height: 70,
                         child: TextFormField(
@@ -180,7 +180,7 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                               contentPadding: const EdgeInsets.only(
                                   left: 20.0,
                                   right: 20.0),
-                              border: OutlineInputBorder(),
+                              border: const OutlineInputBorder(),
                               focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                       color: Theme.of(
@@ -190,7 +190,7 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                           controller: _passwordController,
                         ),
                       ),
-                      SizedBox(height: 5,),
+                      const SizedBox(height: 5,),
                       Container(
                         height: 70,
                         child: TextFormField(
@@ -215,7 +215,7 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                                       width: 2))),
                         ),
                       ),
-                      SizedBox(height: 5,),
+                      const SizedBox(height: 5,),
                       Row(
                         children: [
                           Checkbox(value: checkPremium,splashRadius: 10, onChanged: (value){
@@ -225,8 +225,8 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                               });
                             }
                           },activeColor: secondaryColor,),
-                          SizedBox(width: 10,),
-                          Text("Abonnement Premium",style: TextStyle(color: secondaryColor),)
+                          const SizedBox(width: 10,),
+                          const Text("Abonnement Premium",style: TextStyle(color: secondaryColor),)
                         ],
                       ),
                       Expanded(child: Container()),
@@ -267,7 +267,7 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 5,)
+                      const SizedBox(height: 5,)
                     ],
                   ),
                 ),
@@ -306,12 +306,12 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
             ),
             child: Column(
               children: [
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Image.asset("assets/images/congrats.png",width: 60,height: 60,),
-                SizedBox(height: 10),
-                Text("Félicitions vous faites parti(e)s"),
-                Text("de la famille 13.Edu"),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
+                const Text("Félicitions vous faites parti(e)s"),
+                const Text("de la famille 13.Edu"),
+                const SizedBox(height: 10),
                 TextButton(
                     onPressed: (){
                       _passwordController.clear();
@@ -320,7 +320,7 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                       inscriptionController.inscriptionModel.value = InscriptionModel.init();
                       context.go("/login");
                     },
-                    child: Text("Connectez-vous maintenant"))
+                    child: const Text("Connectez-vous maintenant"))
               ],
             ),
           ),

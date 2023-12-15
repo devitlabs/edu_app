@@ -2,7 +2,8 @@ import 'package:edu_app/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'ressource_post_bac.dart';
+import 'gestion_concours.dart';
+import 'gestion_ressource.dart';
 import 'ressource_six_tle.dart';
 
 class BlogScreen extends StatefulWidget {
@@ -15,9 +16,9 @@ class BlogScreen extends StatefulWidget {
 class _BlogScreenState extends State<BlogScreen> {
 
   final _kTabs = <Tab>[
-    const Tab(text: 'Calculateur'),
-    const Tab(text: '6ème - Tle'),
-    const Tab(text: 'Post BAC'),
+    const Tab(text: 'Ressources'),
+    const Tab(text: 'Concours'),
+    const Tab(text: 'Publications'),
   ];
 
   @override
@@ -26,7 +27,7 @@ class _BlogScreenState extends State<BlogScreen> {
       length: _kTabs.length,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Blog - Ressources"),
+          title: const Text("Blog"),
           leading: IconButton(
               onPressed: () {
                 context.go("/app-menu");
@@ -41,11 +42,11 @@ class _BlogScreenState extends State<BlogScreen> {
             tabs: _kTabs,
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
-            Text("Calculateur"),
-            RessourceSixTle(),
-            RessourcePostBAC(),
+            GestionRessources(),
+            GestionConcours(),
+            GestionPublications(),
           ],
         ),
       ),
