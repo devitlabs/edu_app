@@ -105,7 +105,7 @@ class _SimulateurOrientationScreenState extends State<SimulateurOrientationScree
               padding: const EdgeInsets.all(10),
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Color(0xFFCCECF9),
+                color: const Color(0xFFCCECF9),
                 borderRadius: BorderRadius.circular(20)
               ),
               child: Column(

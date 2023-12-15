@@ -141,7 +141,7 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                               },
                             ),
                           ),
-                          SizedBox(height: 4,),
+                          const SizedBox(height: 4,),
                           Container(
                             width: double.infinity,
                             height: 50,
