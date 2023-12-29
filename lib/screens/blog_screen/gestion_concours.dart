@@ -71,7 +71,7 @@ class _GestionPublicationsState extends State<GestionPublications> {
                   (doc) =>  CardRessource(
                     title: doc.typeDocumensLibelle,
                     id: doc.id,
-                    description: doc.description,
+                    description: doc.description??"",
                     imagePath: "http://164.160.33.223/assets/images/document/${doc.typeDocumensLibelle}.${doc.extension}",
                   ),
           ).toList(),

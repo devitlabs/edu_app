@@ -87,7 +87,6 @@ class ApiClient  {
         "user": "1",
         "isSimpleLoading": false,
         "data": {
-
         }
       });
       final response = await http.post(
@@ -97,14 +96,21 @@ class ApiClient  {
         },
         body: data,
       );
-
+      final jsonData = jsonDecode(response.body);
       if (response.statusCode == 200) {
-        final jsonData = jsonDecode(response.body);
         final listItems = jsonData["items"] as List;
-        final listDocuments = listItems.map(
-                (json) => DocumentModel.fromJson(json)
-        ).toList();
-        return listDocuments;
+
+        List<DocumentModel> result = [];
+
+        for (var items in listItems ) {
+          try {
+            result.add(DocumentModel.fromJson(items));
+          } catch (e) {
+            continue ;
+          }
+        }
+
+        return result;
       } else {
         return null;
       }

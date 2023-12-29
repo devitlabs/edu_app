@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../controllers/auth_controller.dart';
 import '../../models/user_model.dart';
+import '../../widgets/header_curved_container.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -96,7 +97,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     double hCircle = 150; 
     return SafeArea(
       child: Scaffold(
@@ -106,12 +106,20 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 252,
               width: double.infinity,
               child: Stack(
+                alignment: Alignment.center,
                 children: [
-                  Image.asset('assets/images/img_option1.png'),
-                  Positioned(
-                      left: -hCircle/2+width/2,
-                      top: 100,
-                      child: Container(
+                  CustomPaint(
+                    painter: HeaderCurvedContainer(),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(height: 90,),
+                      Container(
                         width: hCircle,height: hCircle,
                         decoration: BoxDecoration(
                           border: Border.all(color: primaryColor,width: 4),
@@ -121,9 +129,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Center(
                           child:  Image.asset("assets/logos/logo_app.png",width: 100,height: 100,),
                         ),
-        
-                      )
-                  )
+                      ),
+                    ],
+                  ),
+
                 ],
               ),
             ),

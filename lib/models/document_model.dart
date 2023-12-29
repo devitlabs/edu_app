@@ -53,5 +53,7 @@ class DocumentModel {
     "typeDocumentCode": typeDocumentCode,
     "typeDocumentFk": typeDocumentFk,
     "typeDocumentLibelle": typeDocumentLibelle,
+
+
   };
 }

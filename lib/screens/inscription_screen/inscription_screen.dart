@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import '../../controllers/inscription_controller.dart';
+import '../../widgets/header_curved_container.dart';
 
 class InscriptionScreen extends StatefulWidget {
   const InscriptionScreen({super.key});
@@ -25,7 +26,6 @@ class _InscriptionScreenState extends State<InscriptionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     double hCircle = 150;
     return SafeArea(
       child: Scaffold(
@@ -35,15 +35,31 @@ class _InscriptionScreenState extends State<InscriptionScreen> {
               height: 252,
               width: double.infinity,
               child: Stack(
+                alignment: Alignment.center,
                 children: [
-                  Image.asset('assets/images/img_option1.png'),
-                  IconButton(onPressed: (){
-                    context.go("/login");
-                  }, icon: Icon(Icons.arrow_back,color: Colors.white,size: 25,)),
-                  Positioned(
-                      left: -hCircle/2+width/2,
-                      top: 100,
-                      child: Container(
+                  CustomPaint(
+                    painter: HeaderCurvedContainer(),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 40,
+                        width: double.infinity,
+                        alignment: Alignment.centerLeft,
+                        child: IconButton(
+                          icon: Icon(Icons.arrow_back,color: Colors.white,size: 30,),
+                          onPressed: (){
+                            context.go("/login");
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 50,),
+                      Container(
                         width: hCircle,height: hCircle,
                         decoration: BoxDecoration(
                           border: Border.all(color: primaryColor,width: 4),
@@ -53,9 +69,9 @@ class _InscriptionScreenState extends State<InscriptionScreen> {
                         child: Center(
                           child:  Image.asset("assets/logos/logo_app.png",width: 100,height: 100,),
                         ),
-
-                      )
-                  )
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -90,8 +106,8 @@ class _InscriptionScreenState extends State<InscriptionScreen> {
             if (estEleve != null ) Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Vous avez choisi le profil : ",style: TextStyle(fontSize: 16)),
-                Text(estEleve == true ? "Elève" : "Encardreur",style: TextStyle(fontSize: 16,color: primaryColor),),
+                const Text("Vous avez choisi le profil : ",style: TextStyle(fontSize: 16)),
+                Text(estEleve == true ? "Elève" : "Encardreur",style: const TextStyle(fontSize: 16,color: primaryColor),),
               ],
             ),
             Expanded(child: Container()),
@@ -104,11 +120,11 @@ class _InscriptionScreenState extends State<InscriptionScreen> {
                       context.go("/inscription/step-2");
                     }
                   },
-                  child: Container(height: 40, width: double.infinity,
+                  child: const SizedBox(height: 40, width: double.infinity,
                     child: Center(child: Text("Suivant",style: TextStyle(fontSize: 16),)),
                   )),
             ),
-            SizedBox(height: 10,)
+            const SizedBox(height: 10,)
           ],
         ),
       ),
@@ -146,7 +162,7 @@ class _OptionButtonState extends State<OptionButton> {
               child: Image.asset(widget.image,width: 80,height: 80,),
             ),
             const SizedBox(height: 5,),
-            Text(widget.name,style: TextStyle(fontSize: 16),)
+            Text(widget.name,style: const TextStyle(fontSize: 16),)
           ],
         ),
       ),
