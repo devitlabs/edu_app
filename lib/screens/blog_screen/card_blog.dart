@@ -34,11 +34,11 @@ class _CardRessourceState extends State<CardRessource> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(widget.title,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+                  Text(widget.title,style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
                   const SizedBox(height: 5,),
-                  Container(
+                  SizedBox(
                     height: 120,
-                    child: Text(widget.description,style: TextStyle(fontStyle: FontStyle.italic, fontSize: 14),overflow: TextOverflow.fade,
+                    child: Text(widget.description,style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 14),overflow: TextOverflow.fade,
                     ),
                   ),
                 ],
@@ -47,7 +47,7 @@ class _CardRessourceState extends State<CardRessource> {
             ],
           ),
         ),
-        SizedBox(height: 2,),
+        const SizedBox(height: 2,),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -64,7 +64,7 @@ class _CardRessourceState extends State<CardRessource> {
             ),)
           ],
         ),
-        Divider()
+        const Divider()
       ],
     );
   }

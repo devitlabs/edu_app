@@ -12,7 +12,7 @@ class LoadingScreen extends StatefulWidget {
 class _LoadingScreenState extends State<LoadingScreen> {
 
   void routeToScreen() async{
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     if (widget.redirection != null ) {
       context.go("${widget.redirection}");
     } else {
@@ -35,7 +35,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset("assets/logos/logo_app.png",width: 80,height: 80,),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             const CircularProgressIndicator()
           ],
         ),

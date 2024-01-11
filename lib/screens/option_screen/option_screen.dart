@@ -11,7 +11,7 @@ class OptionScreen extends StatefulWidget {
 
 class _OptionScreenState extends State<OptionScreen> {
 
-  bool? estEleve = null;
+  bool? estEleve;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class _OptionScreenState extends State<OptionScreen> {
       child: Scaffold(
         body: Column(
           children: [
-            Container(
+            SizedBox(
               height: 252,
               width: double.infinity,
               child: Stack(
@@ -29,7 +29,7 @@ class _OptionScreenState extends State<OptionScreen> {
                   Image.asset('assets/images/img_option1.png'),
                   IconButton(onPressed: (){
                     context.go("/login");
-                  }, icon: Icon(Icons.arrow_back,color: Colors.white,size: 25,)),
+                  }, icon: const Icon(Icons.arrow_back,color: Colors.white,size: 25,)),
                   Positioned(
                     left: -hCircle/2+width/2,
                       top: 100,
@@ -49,12 +49,12 @@ class _OptionScreenState extends State<OptionScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 20,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            const SizedBox(height: 20,),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15.0),
               child: Text("Commençons ! Veuillez choisir votre de type de profil : Encadreur ou Elève.",style: TextStyle(color: Colors.black,fontSize:16 ),),
             ),
-            SizedBox(height: 30,),
+            const SizedBox(height: 30,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -74,8 +74,8 @@ class _OptionScreenState extends State<OptionScreen> {
             if (estEleve != null ) Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Vous avez choisi le profil : ",style: TextStyle(fontSize: 16)),
-                Text(estEleve == true ? "Elève" : "Encardreur",style: TextStyle(fontSize: 16,color: primaryColor),),
+                const Text("Vous avez choisi le profil : ",style: TextStyle(fontSize: 16)),
+                Text(estEleve == true ? "Elève" : "Encardreur",style: const TextStyle(fontSize: 16,color: primaryColor),),
               ],
             ),
             Expanded(child: Container()),
@@ -88,11 +88,11 @@ class _OptionScreenState extends State<OptionScreen> {
                     //   context.go("/inscription/step-2");
                     // }
                   },
-                  child: Container(height: 40, width: double.infinity,
+                  child: const SizedBox(height: 40, width: double.infinity,
                     child: Center(child: Text("Suivant",style: TextStyle(fontSize: 16),)),
                   )),
             ),
-            SizedBox(height: 10,)
+            const SizedBox(height: 10,)
           ],
         ),
       ),
@@ -130,7 +130,7 @@ class _OptionButtonState extends State<OptionButton> {
               child: Image.asset(widget.image,width: 80,height: 80,),
             ),
             const SizedBox(height: 5,),
-            Text(widget.name,style: TextStyle(fontSize: 16),)
+            Text(widget.name,style: const TextStyle(fontSize: 16),)
           ],
         ),
       ),

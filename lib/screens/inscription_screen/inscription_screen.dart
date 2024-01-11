@@ -15,7 +15,7 @@ class InscriptionScreen extends StatefulWidget {
 class _InscriptionScreenState extends State<InscriptionScreen> {
 
 
-  bool? estEleve = null;
+  bool? estEleve;
   final InscriptionController inscriptionController = Get.put(InscriptionController());
 
   @override
@@ -52,7 +52,7 @@ class _InscriptionScreenState extends State<InscriptionScreen> {
                         width: double.infinity,
                         alignment: Alignment.centerLeft,
                         child: IconButton(
-                          icon: Icon(Icons.arrow_back,color: Colors.white,size: 30,),
+                          icon: const Icon(Icons.arrow_back,color: Colors.white,size: 30,),
                           onPressed: (){
                             context.go("/login");
                           },

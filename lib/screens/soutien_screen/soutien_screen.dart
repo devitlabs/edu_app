@@ -19,7 +19,7 @@ class _SoutienScreenState extends State<SoutienScreen> {
             },
             splashRadius: 20,
             padding: EdgeInsets.zero,
-            icon: Icon(Icons.arrow_back)
+            icon: const Icon(Icons.arrow_back)
         ),
         title: const Text("Soutien Scolaire"),
       ),

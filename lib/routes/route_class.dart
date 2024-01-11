@@ -90,14 +90,14 @@ class RouteClass {
                 path: 'resultats',
                 pageBuilder: (context, state) => NoTransitionPage<void>(
                     key: state.pageKey,
-                    child: Center(child: const Text("Résultats"))
+                    child: const Center(child: Text("Résultats"))
                 ),
               ),
               GoRoute(
                 path: 'soutien',
                 pageBuilder: (context, state) => NoTransitionPage<void>(
                     key: state.pageKey,
-                    child: Center(child: const Text("Soutien"))
+                    child: const Center(child: Text("Soutien"))
                 ),
               ),
             ],
@@ -107,19 +107,19 @@ class RouteClass {
       GoRoute(
         path: '/inscription',
         builder: (BuildContext context, GoRouterState state) {
-          return InscriptionScreen();
+          return const InscriptionScreen();
         },
         routes:  [
           GoRoute(
               path: 'step-2',
               builder: (BuildContext context, GoRouterState state) {
-                return InscriptionScreenTwo();
+                return const InscriptionScreenTwo();
               }
           ),
           GoRoute(
               path: 'step-3',
               builder: (BuildContext context, GoRouterState state) {
-                return InscriptionScreenThree();
+                return const InscriptionScreenThree();
               }
           ),
         ]
@@ -139,7 +139,7 @@ class RouteClass {
         isExpired = dateNow.isAfter(dateExpiration);
       }
 
-      print("isExpired : ${isExpired}");
+      print("isExpired : $isExpired");
 
       if ( path !=null && path.contains("inscription") ) {
         return null;

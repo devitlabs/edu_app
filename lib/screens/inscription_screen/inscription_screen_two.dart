@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:edu_app/constants/colors.dart';
-import 'package:edu_app/screens/inscription_screen/inscription_screen_three.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +16,7 @@ class InscriptionScreenTwo extends StatefulWidget {
 
 class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
 
-  String? login = null;
+  String? login;
   final a = Random().nextInt(9);
   final b = Random().nextInt(9);
   late final TextEditingController _nomController;
@@ -67,12 +66,12 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(onPressed: (){context.go("/inscription");},splashRadius: 20,icon: Icon(Icons.arrow_back)),
-                    Text("Inscription 2/3",style: TextStyle(fontSize: 22),),
-                    SizedBox(width: 20,)
+                    IconButton(onPressed: (){context.go("/inscription");},splashRadius: 20,icon: const Icon(Icons.arrow_back)),
+                    const Text("Inscription 2/3",style: TextStyle(fontSize: 22),),
+                    const SizedBox(width: 20,)
                   ],
                 ),
-                SizedBox(height: 2,),
+                const SizedBox(height: 2,),
                 Container(
                   width: double.infinity,
                   height: 5,
@@ -87,7 +86,7 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                     ],
                   ),
                 ),
-                SizedBox(height: 5,),
+                const SizedBox(height: 5,),
                 Expanded(
                     child: SingleChildScrollView(
                       padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
@@ -101,16 +100,16 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                                 style: const TextStyle(fontSize: 16,color: secondaryColor),),
                             ],
                           ),
-                          SizedBox(height: 4,),
+                          const SizedBox(height: 4,),
                           Container(
                             width: 250,
                             height: 2,
-                            color: Color(0xFFD9D9D9),
+                            color: const Color(0xFFD9D9D9),
                           ),
-                          SizedBox(height: 4,),
-                          Text("Veuillez renseigner les champs ci-dessous.  ", style: TextStyle(color: Color(0xFFBBBBBB),fontSize: 15),),
-                          SizedBox(height: 4,),
-                          Container(
+                          const SizedBox(height: 4,),
+                          const Text("Veuillez renseigner les champs ci-dessous.  ", style: TextStyle(color: Color(0xFFBBBBBB),fontSize: 15),),
+                          const SizedBox(height: 4,),
+                          SizedBox(
                             height: 70,
                             child: TextFormField(
                               validator: (value) {
@@ -124,7 +123,7 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                                   contentPadding: const EdgeInsets.only(
                                       left: 20.0,
                                       right: 20.0),
-                                  border: OutlineInputBorder(),
+                                  border: const OutlineInputBorder(),
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Theme.of(
@@ -135,7 +134,7 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                               onChanged: (value){
                                 setState(() {
                                   setState(() {
-                                    login = "${value}${a}${b}";
+                                    login = "$value$a$b";
                                   });
                                 });
                               },
@@ -153,13 +152,13 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 20.0),
                               child: Text(
-                                "${login}",
-                                style: TextStyle(fontSize: 18,color: secondaryColor,fontWeight: FontWeight.bold),
+                                "$login",
+                                style: const TextStyle(fontSize: 18,color: secondaryColor,fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
-                          SizedBox(height: 15,),
-                          Container(
+                          const SizedBox(height: 15,),
+                          SizedBox(
                             height: 70,
                             child: TextFormField(
                               validator: (value) {
@@ -173,7 +172,7 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                                   contentPadding: const EdgeInsets.only(
                                       left: 20.0,
                                       right: 20.0),
-                                  border: OutlineInputBorder(),
+                                  border: const OutlineInputBorder(),
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Theme.of(
@@ -183,8 +182,8 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                               controller: _prenomController,
                             ),
                           ),
-                          SizedBox(height: 5,),
-                          Container(
+                          const SizedBox(height: 5,),
+                          SizedBox(
                             height: 70,
                             child: TextFormField(
                               maxLength: 10,
@@ -200,7 +199,7 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                                   contentPadding: const EdgeInsets.only(
                                       left: 20.0,
                                       right: 20.0),
-                                  border: OutlineInputBorder(),
+                                  border: const OutlineInputBorder(),
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Theme.of(
@@ -210,8 +209,8 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                               controller: _villeController,
                             ),
                           ),
-                          SizedBox(height: 5,),
-                          Container(
+                          const SizedBox(height: 5,),
+                          SizedBox(
                             height: 70,
                             child: TextFormField(
                               maxLength: 10,
@@ -227,7 +226,7 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                                   contentPadding: const EdgeInsets.only(
                                       left: 20.0,
                                       right: 20.0),
-                                  border: OutlineInputBorder(),
+                                  border: const OutlineInputBorder(),
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Theme.of(
@@ -237,23 +236,23 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                               controller: _telController,
                             ),
                           ),
-                          SizedBox(height: 5,),
+                          const SizedBox(height: 5,),
                           Container(
                             height: 40,
-                            padding: EdgeInsets.only(left: 20,right: 10),
+                            padding: const EdgeInsets.only(left: 20,right: 10),
                             width: double.infinity,
                             decoration: BoxDecoration(
-                                border: Border.all(color: Color(0xFFBBBBBB)),
+                                border: Border.all(color: const Color(0xFFBBBBBB)),
                                 borderRadius: BorderRadius.circular(5)
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(_btnClasse??"Classe",style: TextStyle(color: Color(0xFF646464)),),
+                                Text(_btnClasse??"Classe",style: const TextStyle(color: Color(0xFF646464)),),
                                 PopupMenuButton<String>(
                                   padding: EdgeInsets.zero,
-                                  icon: Icon(Icons.arrow_drop_down_outlined,color: Color(0xFF646464),size: 40,),
+                                  icon: const Icon(Icons.arrow_drop_down_outlined,color: Color(0xFF646464),size: 40,),
                                   onSelected: (String newValue) {
                                     setState(() {
                                       _btnClasse = newValue;
@@ -265,7 +264,7 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                             ),
                           ),
                           const SizedBox(height: 15,),
-                          Container(
+                          SizedBox(
                             height: 70,
                             child: TextFormField(
                               validator: (value) {
@@ -279,7 +278,7 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                                   contentPadding: const EdgeInsets.only(
                                       left: 20.0,
                                       right: 20.0),
-                                  border: OutlineInputBorder(),
+                                  border: const OutlineInputBorder(),
                                   focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Theme.of(
@@ -289,7 +288,7 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                               controller: _etablissementController,
                             ),
                           ),
-                          SizedBox(height: 5,),
+                          const SizedBox(height: 5,),
                           OutlinedButton(
                               onPressed: (){
                                 if (_formKey.currentState!.validate() && _btnClasse != null ) {

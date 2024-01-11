@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 5,),
-            Container(
+            const SizedBox(
               height: 200,
               width: double.infinity,
               child: AnnouncementSlider(),
@@ -111,11 +111,11 @@ class _HomeButtonState extends State<HomeButton> {
               height: 90,
               width: 90,
               decoration: BoxDecoration(
-                  color: Color(0xFFEAF9F6),
+                  color: const Color(0xFFEAF9F6),
                   borderRadius: BorderRadius.circular(10)
               ),
               child: Center(
-                child: Container(
+                child: SizedBox(
                   width: 60,
                   height: 60,
                   child: Image.asset(widget.image,fit: BoxFit.fill,),
@@ -134,6 +134,8 @@ class _HomeButtonState extends State<HomeButton> {
 
 
 class AnnouncementSlider extends StatefulWidget {
+  const AnnouncementSlider({super.key});
+
   @override
   _AnnouncementSliderState createState() => _AnnouncementSliderState();
 }
@@ -161,7 +163,7 @@ class _AnnouncementSliderState extends State<AnnouncementSlider> {
             itemBuilder: (context, index) {
               return Container(
                 height: 250, // Hauteur fixe de 250 pixels pour chaque annonce
-                margin: EdgeInsets.symmetric(horizontal: 4.0),
+                margin: const EdgeInsets.symmetric(horizontal: 4.0),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   borderRadius: BorderRadius.circular(12.0),
@@ -177,7 +179,7 @@ class _AnnouncementSliderState extends State<AnnouncementSlider> {
             },
           ),
         ),
-        SizedBox(height: 2),
+        const SizedBox(height: 2),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: List.generate(
@@ -193,7 +195,7 @@ class _AnnouncementSliderState extends State<AnnouncementSlider> {
     return Container(
       width: 8.0,
       height: 8.0,
-      margin: EdgeInsets.symmetric(horizontal: 4.0),
+      margin: const EdgeInsets.symmetric(horizontal: 4.0),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: _currentPage == index ? Colors.blue : Colors.grey,

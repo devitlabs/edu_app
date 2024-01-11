@@ -34,7 +34,7 @@ class _BlogScreenState extends State<BlogScreen> {
               },
               splashRadius: 20,
               padding: EdgeInsets.zero,
-              icon: Icon(Icons.arrow_back)
+              icon: const Icon(Icons.arrow_back)
           ),
           bottom: TabBar(
             indicatorColor: secondaryColor,

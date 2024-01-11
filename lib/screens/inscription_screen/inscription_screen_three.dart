@@ -104,7 +104,7 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                       const SizedBox(height: 4,),
                       const Text("Maintenant, veuillez charger une belle photo de vous.", style: TextStyle(color: Color(0xFFBBBBBB),fontSize: 15),),
                       const SizedBox(height: 8,),
-                      Container(
+                      SizedBox(
                         width: 80,
                         height: 80,
                         child: Stack(
@@ -119,7 +119,7 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                         ),
                       ),
                       const SizedBox(height: 10,),
-                      Container(
+                      SizedBox(
                         height: 70,
                         child: TextFormField(
                           validator: (value) {
@@ -144,7 +144,7 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                         ),
                       ),
                       const SizedBox(height: 5,),
-                      Container(
+                      SizedBox(
                         height: 50,
                         width: double.infinity,
                         child: Row(
@@ -157,7 +157,7 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                         ),
                       ),
                       const SizedBox(height: 5,),
-                      Container(
+                      SizedBox(
                         height: 70,
                         child: TextFormField(
                           obscureText: _obscureText,
@@ -191,7 +191,7 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                         ),
                       ),
                       const SizedBox(height: 5,),
-                      Container(
+                      SizedBox(
                         height: 70,
                         child: TextFormField(
                           obscureText: _obscureText,
@@ -287,7 +287,7 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
     String day = date.day < 10 ? "0${date.day}" :"${date.day}";
     String month = date.month < 10 ? "0${date.month}" :"${date.month}";
 
-    return "${day}/${month}/${date.year}";
+    return "$day/$month/${date.year}";
   }
 
   void showSucces() {

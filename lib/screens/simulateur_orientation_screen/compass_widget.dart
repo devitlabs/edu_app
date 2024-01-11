@@ -1,95 +1,96 @@
-import 'package:edu_app/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
-class ResultatSimulateurBEPC extends StatefulWidget {
-  final double moBEPC;
-  const ResultatSimulateurBEPC({super.key, required this.moBEPC});
+class CompassWidget extends StatefulWidget {
+  const CompassWidget({super.key});
 
   @override
-  State<ResultatSimulateurBEPC> createState() => _ResultatSimulateurBEPCState();
+  State<CompassWidget> createState() => _CompassWidgetState();
 }
 
-class _ResultatSimulateurBEPCState extends State<ResultatSimulateurBEPC> {
+class _CompassWidgetState extends State<CompassWidget> {
 
-  bool isWebFullView = false;
   bool isCardView = false;
+  bool isWebFullView = false;
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      // change axis interval based on orientation for the UI that looks good.
+      _interval =
+      MediaQuery.of(context).orientation == Orientation.portrait ? 10 : 20;
+    });
     return _buildTemperatureMonitorExample();
   }
-
-  /// Returns the gauge temperature monitor
   SfRadialGauge _buildTemperatureMonitorExample() {
     return SfRadialGauge(
-      animationDuration: 5000,
+      animationDuration: 3500,
       enableLoadingAnimation: true,
       axes: <RadialAxis>[
         RadialAxis(
-            minimum: 0,
-            maximum: 20,
-            interval: 2,
+            minimum: -50,
+            maximum: 150,
+            interval: isCardView ? 20 : _interval,
             minorTicksPerInterval: 9,
             showAxisLine: false,
-            radiusFactor: 0.9,
+            radiusFactor: isWebFullView ? 0.8 : 0.9,
             labelOffset: 8,
             ranges: <GaugeRange>[
               GaugeRange(
-                  startValue: 14,
-                  endValue: 20,
+                  startValue: -50,
+                  endValue: 0,
                   startWidth: 0.265,
                   sizeUnit: GaugeSizeUnit.factor,
                   endWidth: 0.265,
                   color: const Color.fromRGBO(34, 144, 199, 0.75)),
               GaugeRange(
-                  startValue: 12,
-                  endValue: 14,
+                  startValue: 0,
+                  endValue: 10,
                   startWidth: 0.265,
                   sizeUnit: GaugeSizeUnit.factor,
                   endWidth: 0.265,
                   color: const Color.fromRGBO(34, 195, 199, 0.75)),
               GaugeRange(
                   startValue: 10,
-                  endValue: 12,
+                  endValue: 30,
                   startWidth: 0.265,
                   sizeUnit: GaugeSizeUnit.factor,
                   endWidth: 0.265,
                   color: const Color.fromRGBO(123, 199, 34, 0.75)),
               GaugeRange(
-                  startValue: 8,
-                  endValue: 10,
+                  startValue: 30,
+                  endValue: 40,
                   startWidth: 0.265,
                   sizeUnit: GaugeSizeUnit.factor,
                   endWidth: 0.265,
                   color: const Color.fromRGBO(238, 193, 34, 0.75)),
               GaugeRange(
-                  startValue: 0,
-                  endValue: 8,
+                  startValue: 40,
+                  endValue: 150,
                   startWidth: 0.265,
                   sizeUnit: GaugeSizeUnit.factor,
                   endWidth: 0.265,
                   color: const Color.fromRGBO(238, 79, 34, 0.65)),
             ],
-            annotations: <GaugeAnnotation>[
-              const GaugeAnnotation(
+            annotations: const <GaugeAnnotation>[
+              GaugeAnnotation(
                   angle: 90,
                   positionFactor: 0.35,
-                  widget: Text('MO BEPC',
+                  widget: Text('Temp.°C',
                       style:
-                      TextStyle(color: Colors.black, fontSize: 16))),
+                      TextStyle(color: Color(0xFFF8B195), fontSize: 16))),
               GaugeAnnotation(
                 angle: 90,
                 positionFactor: 0.8,
                 widget: Text(
-                  '  ${widget.moBEPC}  ',
-                  style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.black, fontSize: 20),
+                  '  22.5  ',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               )
             ],
             pointers: <GaugePointer>[
               NeedlePointer(
-                value: widget.moBEPC,
+                value: 22.5,
                 needleStartWidth: isCardView ? 0 : 1,
                 needleEndWidth: isCardView ? 5 : 8,
                 animationType: AnimationType.easeOutBack,
@@ -97,14 +98,14 @@ class _ResultatSimulateurBEPCState extends State<ResultatSimulateurBEPC> {
                 animationDuration: 1200,
                 knobStyle: KnobStyle(
                     knobRadius: isCardView ? 0.06 : 0.09,
-                    borderColor: primaryColor,
+                    borderColor: const Color(0xFFF8B195),
                     color: Colors.white,
                     borderWidth: isCardView ? 0.035 : 0.05),
                 tailStyle: TailStyle(
-                    color: primaryColor,
+                    color: const Color(0xFFF8B195),
                     width: isCardView ? 4 : 8,
                     length: isCardView ? 0.15 : 0.2),
-                needleColor: primaryColor,
+                needleColor: const Color(0xFFF8B195),
               )
             ],
             axisLabelStyle: GaugeTextStyle(fontSize: isCardView ? 10 : 12),
@@ -115,4 +116,6 @@ class _ResultatSimulateurBEPCState extends State<ResultatSimulateurBEPC> {
       ],
     );
   }
+
+  double _interval = 10;
 }

@@ -59,7 +59,7 @@ class _SubjectWidgetState extends State<SubjectWidget> {
               ),
             ),
             const SizedBox(width: 10,),
-            Text("${widget.title}",style: const TextStyle(fontSize: 22,color: Colors.black),)
+            Text(widget.title,style: const TextStyle(fontSize: 22,color: Colors.black),)
           ],
         ),
       ),

@@ -17,7 +17,7 @@ class ApiClient  {
         }
       });
       final response = await http.post(
-        Uri.parse('${baseUrl}/utilisateur/login'),
+        Uri.parse('$baseUrl/utilisateur/login'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -49,6 +49,8 @@ class ApiClient  {
                 "login": "${utilisateur.nom?.toLowerCase()}",
                 "password": utilisateur.motPasse,
                 "ville": utilisateur.ville,
+                "email":"kevin.jean@gmail.com",
+                "telephone":"+2250700000001",
                 "description": "dggd",
                 "typeUtuliseurFkx": "1",
                 "matricule": utilisateur.matricule,
@@ -58,9 +60,8 @@ class ApiClient  {
             ]
           }
       );
-      print(data);
       final response = await http.post(
-        Uri.parse('${baseUrl}/utilisateur/create'),
+        Uri.parse('$baseUrl/utilisateur/create'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -90,7 +91,7 @@ class ApiClient  {
         }
       });
       final response = await http.post(
-        Uri.parse('${baseUrl}/documents/getByCriteria'),
+        Uri.parse('$baseUrl/documents/getByCriteria'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

@@ -1,5 +1,4 @@
 import 'package:edu_app/constants/colors.dart';
-import 'package:edu_app/core/api_client.dart';
 import 'package:edu_app/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';

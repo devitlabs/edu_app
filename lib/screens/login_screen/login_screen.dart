@@ -1,6 +1,5 @@
 import 'package:edu_app/constants/colors.dart';
 import 'package:edu_app/core/api_client.dart';
-import 'package:edu_app/screens/inscription_screen/inscription_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
@@ -43,13 +42,13 @@ class _LoginScreenState extends State<LoginScreen> {
               Text('Erreur'), // Title text
             ],
           ),
-          content: Text('${message}'), // Error message content
+          content: Text(message), // Error message content
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Fermer'), // Close button text
+              child: const Text('Fermer'), // Close button text
             ),
           ],
         );
@@ -75,8 +74,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
         await storage.write(key: "estConnecte", value: "true");
         await storage.write(key: "expiration", value: futureTime.toString());
-        await storage.write(key: "login", value: "${_loginController.text}");
-        await storage.write(key: "motPasse", value: "${_passwordController.text}");
+        await storage.write(key: "login", value: _loginController.text);
+        await storage.write(key: "motPasse", value: _passwordController.text);
         
         context.go("/app-menu");
       }
@@ -160,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             contentPadding: const EdgeInsets.only(
                                 left: 20.0,
                                 right: 20.0),
-                            border: OutlineInputBorder(),
+                            border: const OutlineInputBorder(),
                             focusedBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                     color: Theme.of(
@@ -169,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     width: 2))),
                         controller: _loginController,
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       TextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty || value.length < 5 ) {
@@ -216,23 +215,23 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 15),
+                      const SizedBox(height: 15),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Nouveau chez 13.Edu ? ",style: TextStyle(fontSize: 15),),
+                          const Text("Nouveau chez 13.Edu ? ",style: TextStyle(fontSize: 15),),
                           InkWell(
                             onTap: (){
                               context.go("/inscription");
                             },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: Text("Inscription",style: TextStyle(fontSize: 15,color: primaryColor),),
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                     ],
                   ),
                 ),

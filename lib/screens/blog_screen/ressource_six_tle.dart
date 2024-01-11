@@ -54,7 +54,7 @@ class _GestionConcoursState extends State<GestionConcours> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text("Aucune donnée"),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             IconButton(
               icon: const Icon(Icons.refresh,color: Colors.green,),
               onPressed: () {

@@ -56,7 +56,7 @@ class _AppMenuScreenState extends State<AppMenuScreen> {
         centerTitle: true,
         title: const Text("13.Edu"),
         actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.notifications,size: 25,),splashRadius: 20,padding: EdgeInsets.zero,)
+          IconButton(onPressed: (){}, icon: const Icon(Icons.notifications,size: 25,),splashRadius: 20,padding: EdgeInsets.zero,)
         ],
       ),
       drawer: const Drawer(

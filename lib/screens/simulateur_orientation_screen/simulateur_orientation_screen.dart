@@ -5,8 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 
-import 'gauge_widget.dart';
-
 class SimulateurOrientationScreen extends StatefulWidget {
   const SimulateurOrientationScreen({super.key});
 
@@ -79,376 +77,403 @@ class _SimulateurOrientationScreenState extends State<SimulateurOrientationScree
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        leading: IconButton(icon: Icon(Icons.arrow_back),
+        leading: IconButton(icon: const Icon(Icons.arrow_back),
           onPressed: (){
               context.go("/app-menu/accueil");
           },splashRadius: 20,
         ),
-        title: Text("Simulateur d'orientation"),
+        title: const Text("Simulateur d'orientation"),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text("Moyenne d'orientation",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-                  IconButton(onPressed: (){
-                    setState(() {
-                      isShowMO = false;
-                      listNotes = [];
-                    });
-                  }, icon: const Icon(Icons.refresh),splashRadius: 20,)
-                ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Moyenne d'orientation",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+                IconButton(onPressed: (){
+                  setState(() {
+                    isShowMO = false;
+                    listNotes = [];
+                  });
+                }, icon: const Icon(Icons.refresh),splashRadius: 20,)
+              ],
+            ),
+            const SizedBox(height: 10,),
+            Container(
+              padding: const EdgeInsets.all(10),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: const Color(0xFFCCECF9),
+                borderRadius: BorderRadius.circular(20)
               ),
-              const SizedBox(height: 10,),
-              Container(
-                padding: const EdgeInsets.all(10),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFCCECF9),
-                  borderRadius: BorderRadius.circular(20)
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      height: 30,
-                      width: double.infinity,
-                      child: Row(
-                        children: [
-                          Container(
-                            width:160,
-                            child: Text("Matières",style: TextStyle(fontSize: 14),)
-                          ),
-                          SizedBox(width: 5,),
-                          Expanded(
-                              child: Container(
-                                width:100,
-                                child: Text("MA/20",style: TextStyle(fontSize: 12),)
-                          )),
-                          SizedBox(width: 5,),
-                          Expanded(child: Container(
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 30,
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width:160,
+                          child: Text("Matières",style: TextStyle(fontSize: 14),)
+                        ),
+                        SizedBox(width: 5,),
+                        Expanded(
+                            child: SizedBox(
                               width:100,
-                              child: Text("BEPC/20",style: TextStyle(fontSize: 12),)
-                          )),
-                          SizedBox(width: 15,),
-                        ],
-                      ),
+                              child: Text("MA/20",style: TextStyle(fontSize: 12),)
+                        )),
+                        SizedBox(width: 5,),
+                        Expanded(child: SizedBox(
+                            width:100,
+                            child: Text("BEPC/20",style: TextStyle(fontSize: 12),)
+                        )),
+                        SizedBox(width: 15,),
+                      ],
                     ),
-                    Container(
-                      height: 40,
-                      width: double.infinity,
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 40,
-                            width: 160,
-                            padding: const EdgeInsets.only(left: 5),
-                            alignment: Alignment.centerLeft,
-                            decoration: BoxDecoration(
+                  ),
+                  SizedBox(
+                    height: 40,
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 40,
+                          width: 160,
+                          padding: const EdgeInsets.only(left: 5),
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(5)
+                          ),
+                          child: const Text("Composition Française"),
+                        ),
+                        const SizedBox(width: 5,),
+                        Expanded(child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10)
+                          ),
+                          child: Center(
+                            child:  Padding(
+                              padding: const EdgeInsets.only(bottom: 2.0),
+                              child: TextFormField(
+                                controller: fr1Controller,
+                                maxLength: 5,
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.allow(RegExp(r'^\d+\,?\d{0,2}')), // Allow up to 2 decimal places
+                                ],
+                                keyboardType: TextInputType.number,
+                                style: const TextStyle(color: Colors.black, fontSize: 14),
+                                textAlign: TextAlign.center,
+                                decoration: const InputDecoration(
+                                  counterText: "",
+                                  hintText: "0",
+                                  border: InputBorder.none,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )),
+                        const SizedBox(width: 5,),
+                        Expanded(child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10)
+                          ),
+                          child: Center(
+                            child:  Padding(
+                              padding: const EdgeInsets.only(bottom: 2.0),
+                              child: TextFormField(
+                                controller: fr2Controller,
+                                maxLength: 5,
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.allow(RegExp(r'^\d+\,?\d{0,2}')), // Allow up to 2 decimal places
+                                ],
+                                keyboardType: TextInputType.number,
+                                style: const TextStyle(color: Colors.black, fontSize: 14),
+                                textAlign: TextAlign.center,
+                                decoration: const InputDecoration(
+                                  counterText: "",
+                                  hintText: "0",
+                                  border: InputBorder.none,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )),
+                        const SizedBox(width: 5,),
+                        const SizedBox(
+                          width: 15,
+                          child: Center(
+                            child: Text("x2",style: TextStyle(color: Colors.black,fontSize: 14),),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 5,),
+                  SizedBox(
+                    height: 40,
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 40,
+                          width: 160,
+                          padding: const EdgeInsets.only(left: 5),
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(5)
-                            ),
-                            child: Text("Composition Française"),
                           ),
-                          const SizedBox(width: 5,),
-                          Expanded(child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10)
-                            ),
-                            child: Center(
-                              child:  Padding(
-                                padding: const EdgeInsets.only(bottom: 2.0),
-                                child: TextFormField(
-                                  controller: fr1Controller,
-                                  maxLength: 5,
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.allow(RegExp(r'^\d+\,?\d{0,2}')), // Allow up to 2 decimal places
-                                  ],
-                                  keyboardType: TextInputType.number,
-                                  style: const TextStyle(color: Colors.black, fontSize: 14),
-                                  textAlign: TextAlign.center,
-                                  decoration: const InputDecoration(
-                                    counterText: "",
-                                    hintText: "0",
-                                    border: InputBorder.none,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )),
-                          SizedBox(width: 5,),
-                          Expanded(child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10)
-                            ),
-                            child: Center(
-                              child:  Padding(
-                                padding: const EdgeInsets.only(bottom: 2.0),
-                                child: TextFormField(
-                                  controller: fr2Controller,
-                                  maxLength: 5,
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.allow(RegExp(r'^\d+\,?\d{0,2}')), // Allow up to 2 decimal places
-                                  ],
-                                  keyboardType: TextInputType.number,
-                                  style: const TextStyle(color: Colors.black, fontSize: 14),
-                                  textAlign: TextAlign.center,
-                                  decoration: const InputDecoration(
-                                    counterText: "",
-                                    hintText: "0",
-                                    border: InputBorder.none,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )),
-                          const SizedBox(width: 5,),
-                          const SizedBox(
-                            width: 15,
-                            child: Center(
-                              child: Text("x2",style: TextStyle(color: Colors.black,fontSize: 14),),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 5,),
-                    Container(
-                      height: 40,
-                      width: double.infinity,
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 40,
-                            width: 160,
-                            padding: const EdgeInsets.only(left: 5),
-                            alignment: Alignment.centerLeft,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5)
-                            ),
-                            child: Text("Mathématiques"),
+                          child: const Text("Mathématiques"),
+                        ),
+                        const SizedBox(width: 5,),
+                        Expanded(child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10)
                           ),
-                          SizedBox(width: 5,),
-                          Expanded(child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10)
-                            ),
-                            child: Center(
-                              child:  Padding(
-                                padding: const EdgeInsets.only(bottom: 2.0),
-                                child: TextFormField(
-                                  controller: maths1Controller,
-                                  maxLength: 5,
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.allow(RegExp(r'^\d+\,?\d{0,2}')), // Allow up to 2 decimal places
-                                  ],
-                                  keyboardType: TextInputType.number,
-                                  style: const TextStyle(color: Colors.black, fontSize: 14),
-                                  textAlign: TextAlign.center,
-                                  decoration: const InputDecoration(
-                                    counterText: "",
-                                    hintText: "0",
-                                    border: InputBorder.none,
-                                  ),
+                          child: Center(
+                            child:  Padding(
+                              padding: const EdgeInsets.only(bottom: 2.0),
+                              child: TextFormField(
+                                controller: maths1Controller,
+                                maxLength: 5,
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.allow(RegExp(r'^\d+\,?\d{0,2}')), // Allow up to 2 decimal places
+                                ],
+                                keyboardType: TextInputType.number,
+                                style: const TextStyle(color: Colors.black, fontSize: 14),
+                                textAlign: TextAlign.center,
+                                decoration: const InputDecoration(
+                                  counterText: "",
+                                  hintText: "0",
+                                  border: InputBorder.none,
+                                ),
 
-                                ),
                               ),
-                            ),
-                          )),
-                          const SizedBox(width: 5,),
-                          Expanded(child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10)
-                            ),
-                            child: Center(
-                              child:  Padding(
-                                padding: const EdgeInsets.only(bottom: 2.0),
-                                child: TextFormField(
-                                  controller: maths2Controller,
-                                  maxLength: 5,
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.allow(RegExp(r'^\d+\,?\d{0,2}')), // Allow up to 2 decimal places
-                                  ],
-                                  keyboardType: TextInputType.number,
-                                  style: const TextStyle(color: Colors.black, fontSize: 14),
-                                  textAlign: TextAlign.center,
-                                  decoration: const InputDecoration(
-                                    counterText: "",
-                                    hintText: "0",
-                                    border: InputBorder.none,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )),
-                          const SizedBox(width: 5,),
-                          const SizedBox(
-                            width: 15,
-                            child: Center(
-                              child: Text("x2",style: TextStyle(color: Colors.black,fontSize: 14),),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 5,),
-                    SizedBox(
-                      height: 40,
-                      width: double.infinity,
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 40,
-                            width: 160,
-                            padding: const EdgeInsets.only(left: 5),
-                            alignment: Alignment.centerLeft,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5)
-                            ),
-                            child: const Text("Physique-Chimie"),
-                          ),
-                          const SizedBox(width: 5,),
-                          Expanded(child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10)
-                            ),
-                            child: Center(
-                              child:  Padding(
-                                padding: const EdgeInsets.only(bottom: 2.0),
-                                child: TextFormField(
-                                  maxLength: 5,
-                                  controller: pc1Controller,
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.allow(RegExp(r'^\d+\,?\d{0,2}')), // Allow up to 2 decimal places
-                                  ],
-                                  keyboardType: TextInputType.number,
-                                  style: const TextStyle(color: Colors.black, fontSize: 14),
-                                  textAlign: TextAlign.center,
-                                  decoration: const InputDecoration(
-                                    counterText: "",
-                                    hintText: "0",
-                                    border: InputBorder.none,
-                                  ),
-                                ),
-                              ),
-                            )
-                          )),
-                          const SizedBox(width: 5,),
-                          Expanded(child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10)
-                            ),
-                            child: Center(
-                              child:  Padding(
-                                padding: const EdgeInsets.only(bottom: 2.0),
-                                child: TextFormField(
-                                  controller: pc2Controller,
-                                  maxLength: 5,
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.allow(RegExp(r'^\d+\,?\d{0,2}')), // Allow up to 2 decimal places
-                                  ],
-                                  keyboardType: TextInputType.number,
-                                  style: const TextStyle(color: Colors.black, fontSize: 14),
-                                  textAlign: TextAlign.center,
-                                  decoration: const InputDecoration(
-                                    counterText: "",
-                                    hintText: "0",
-                                    border: InputBorder.none,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )),
-                          const SizedBox(width: 5,),
-                          const SizedBox(
-                            width: 15,
-                            child: Center(
-                              child: Text("x1",style: TextStyle(color: Colors.black,fontSize: 14),),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 5,),
-                    Container(
-                      height: 85,
-                      width: double.infinity,
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 80,
-                            width: 160,
-                            padding: const EdgeInsets.only(left: 5),
-                            alignment: Alignment.centerLeft,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(5)
-                            ),
-                            child: Row(
-                              children: [
-                                Text("Anglais"),
-                                SizedBox(width: 20,),
-                                Container(
-                                  width: 2,
-                                  height: 80,
-                                  color: Colors.grey,
-                                ),
-                                Container(width: 80,child: Column(
-                                  children: [
-                                    Expanded(child: Center(child: Text("Ecrit")),),
-                                    Container(
-                                      width: double.infinity,
-                                      height: 2,
-                                      color: Colors.grey,
-                                    ),
-                                    Expanded(child: Center(child: Text("Oral")),),
-                                  ],
-                                ))
-                              ],
                             ),
                           ),
-                          const SizedBox(width: 5,),
-                          Expanded(child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10)
-                            ),
-                            child: Center(
-                              child:  Padding(
-                                padding: const EdgeInsets.only(bottom: 2.0),
-                                child: TextFormField(
-                                  controller: ang1Controller,
-                                  maxLength: 5,
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.allow(RegExp(r'^\d+\,?\d{0,2}')), // Allow up to 2 decimal places
-                                  ],
-                                  keyboardType: TextInputType.number,
-                                  style: const TextStyle(color: Colors.black, fontSize: 14),
-                                  textAlign: TextAlign.center,
-                                  decoration: const InputDecoration(
-                                    counterText: "",
-                                    hintText: "0",
-                                    border: InputBorder.none,
-                                  ),
+                        )),
+                        const SizedBox(width: 5,),
+                        Expanded(child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10)
+                          ),
+                          child: Center(
+                            child:  Padding(
+                              padding: const EdgeInsets.only(bottom: 2.0),
+                              child: TextFormField(
+                                controller: maths2Controller,
+                                maxLength: 5,
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.allow(RegExp(r'^\d+\,?\d{0,2}')), // Allow up to 2 decimal places
+                                ],
+                                keyboardType: TextInputType.number,
+                                style: const TextStyle(color: Colors.black, fontSize: 14),
+                                textAlign: TextAlign.center,
+                                decoration: const InputDecoration(
+                                  counterText: "",
+                                  hintText: "0",
+                                  border: InputBorder.none,
                                 ),
                               ),
                             ),
-                          )),
-                          const SizedBox(width: 5,),
-                          Expanded(child: Column(
+                          ),
+                        )),
+                        const SizedBox(width: 5,),
+                        const SizedBox(
+                          width: 15,
+                          child: Center(
+                            child: Text("x2",style: TextStyle(color: Colors.black,fontSize: 14),),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 5,),
+                  SizedBox(
+                    height: 40,
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 40,
+                          width: 160,
+                          padding: const EdgeInsets.only(left: 5),
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(5)
+                          ),
+                          child: const Text("Physique-Chimie"),
+                        ),
+                        const SizedBox(width: 5,),
+                        Expanded(child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10)
+                          ),
+                          child: Center(
+                            child:  Padding(
+                              padding: const EdgeInsets.only(bottom: 2.0),
+                              child: TextFormField(
+                                maxLength: 5,
+                                controller: pc1Controller,
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.allow(RegExp(r'^\d+\,?\d{0,2}')), // Allow up to 2 decimal places
+                                ],
+                                keyboardType: TextInputType.number,
+                                style: const TextStyle(color: Colors.black, fontSize: 14),
+                                textAlign: TextAlign.center,
+                                decoration: const InputDecoration(
+                                  counterText: "",
+                                  hintText: "0",
+                                  border: InputBorder.none,
+                                ),
+                              ),
+                            ),
+                          )
+                        )),
+                        const SizedBox(width: 5,),
+                        Expanded(child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10)
+                          ),
+                          child: Center(
+                            child:  Padding(
+                              padding: const EdgeInsets.only(bottom: 2.0),
+                              child: TextFormField(
+                                controller: pc2Controller,
+                                maxLength: 5,
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.allow(RegExp(r'^\d+\,?\d{0,2}')), // Allow up to 2 decimal places
+                                ],
+                                keyboardType: TextInputType.number,
+                                style: const TextStyle(color: Colors.black, fontSize: 14),
+                                textAlign: TextAlign.center,
+                                decoration: const InputDecoration(
+                                  counterText: "",
+                                  hintText: "0",
+                                  border: InputBorder.none,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )),
+                        const SizedBox(width: 5,),
+                        const SizedBox(
+                          width: 15,
+                          child: Center(
+                            child: Text("x1",style: TextStyle(color: Colors.black,fontSize: 14),),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 5,),
+                  SizedBox(
+                    height: 85,
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 80,
+                          width: 160,
+                          padding: const EdgeInsets.only(left: 5),
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(5)
+                          ),
+                          child: Row(
                             children: [
-                              Expanded(child: Container(
+                              const Text("Anglais"),
+                              const SizedBox(width: 20,),
+                              Container(
+                                width: 2,
+                                height: 80,
+                                color: Colors.grey,
+                              ),
+                              SizedBox(width: 80,child: Column(
+                                children: [
+                                  const Expanded(child: Center(child: Text("Ecrit")),),
+                                  Container(
+                                    width: double.infinity,
+                                    height: 2,
+                                    color: Colors.grey,
+                                  ),
+                                  const Expanded(child: Center(child: Text("Oral")),),
+                                ],
+                              ))
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 5,),
+                        Expanded(child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10)
+                          ),
+                          child: Center(
+                            child:  Padding(
+                              padding: const EdgeInsets.only(bottom: 2.0),
+                              child: TextFormField(
+                                controller: ang1Controller,
+                                maxLength: 5,
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.allow(RegExp(r'^\d+\,?\d{0,2}')), // Allow up to 2 decimal places
+                                ],
+                                keyboardType: TextInputType.number,
+                                style: const TextStyle(color: Colors.black, fontSize: 14),
+                                textAlign: TextAlign.center,
+                                decoration: const InputDecoration(
+                                  counterText: "",
+                                  hintText: "0",
+                                  border: InputBorder.none,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )),
+                        const SizedBox(width: 5,),
+                        Expanded(child: Column(
+                          children: [
+                            Expanded(child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10)
+                              ),
+                              child: Center(
+                                child:  Padding(
+                                  padding: const EdgeInsets.only(bottom: 2.0),
+                                  child: TextFormField(
+                                    controller: ang2Controller,
+                                    maxLength: 5,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.allow(RegExp(r'^\d+\,?\d{0,2}')), // Allow up to 2 decimal places
+                                    ],
+                                    keyboardType: TextInputType.number,
+                                    style: const TextStyle(color: Colors.black, fontSize: 14),
+                                    textAlign: TextAlign.center,
+                                    decoration: const InputDecoration(
+                                      hintText: "0",
+                                      counterText: "",
+                                      border: InputBorder.none,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )),
+                            const SizedBox(height: 5,),
+                            Expanded(
+                              child: Container(
                                 decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(10)
@@ -457,7 +482,7 @@ class _SimulateurOrientationScreenState extends State<SimulateurOrientationScree
                                   child:  Padding(
                                     padding: const EdgeInsets.only(bottom: 2.0),
                                     child: TextFormField(
-                                      controller: ang2Controller,
+                                      controller: ang3Controller,
                                       maxLength: 5,
                                       inputFormatters: <TextInputFormatter>[
                                         FilteringTextInputFormatter.allow(RegExp(r'^\d+\,?\d{0,2}')), // Allow up to 2 decimal places
@@ -473,120 +498,85 @@ class _SimulateurOrientationScreenState extends State<SimulateurOrientationScree
                                     ),
                                   ),
                                 ),
-                              )),
-                              SizedBox(height: 5,),
-                              Expanded(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10)
-                                  ),
-                                  child: Center(
-                                    child:  Padding(
-                                      padding: const EdgeInsets.only(bottom: 2.0),
-                                      child: TextFormField(
-                                        controller: ang3Controller,
-                                        maxLength: 5,
-                                        inputFormatters: <TextInputFormatter>[
-                                          FilteringTextInputFormatter.allow(RegExp(r'^\d+\,?\d{0,2}')), // Allow up to 2 decimal places
-                                        ],
-                                        keyboardType: TextInputType.number,
-                                        style: const TextStyle(color: Colors.black, fontSize: 14),
-                                        textAlign: TextAlign.center,
-                                        decoration: const InputDecoration(
-                                          hintText: "0",
-                                          counterText: "",
-                                          border: InputBorder.none,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
                               ),
-                            ],
-                          )),
-                          const SizedBox(width: 5,),
-                          const SizedBox(
-                            width: 15,
-                            child: Center(
-                              child: Text("x1",style: TextStyle(color: Colors.black,fontSize: 14),),
                             ),
-                          )
-                        ],
-                      ),
+                          ],
+                        )),
+                        const SizedBox(width: 5,),
+                        const SizedBox(
+                          width: 15,
+                          child: Center(
+                            child: Text("x1",style: TextStyle(color: Colors.black,fontSize: 14),),
+                          ),
+                        )
+                      ],
                     ),
-                    const SizedBox(height: 5,),
-                    SizedBox(
-                      height: 40,
-                      width: double.infinity,
-                      child: Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () async {
-                              tableauNotes["fr1"] = convertStringToNum(fr1Controller.text);
-                              tableauNotes["fr2"] = convertStringToNum(fr2Controller.text);
-                              tableauNotes["ang1"] = convertStringToNum(ang1Controller.text);
-                              tableauNotes["ang2"] = convertStringToNum(ang2Controller.text);
-                              tableauNotes["ang3"] = convertStringToNum(ang3Controller.text);
-                              tableauNotes["maths1"] = convertStringToNum(maths1Controller.text);
-                              tableauNotes["maths2"] = convertStringToNum(maths2Controller.text);
-                              tableauNotes["pc1"] = convertStringToNum(pc1Controller.text);
-                              tableauNotes["pc2"] = convertStringToNum(pc2Controller.text);
-
-                              bool allNotNull = tableauNotes.values.every((value) => value != null);
-                              if (allNotNull) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Calcul ...')),
-                                );
-                                await Future.delayed(Duration(seconds: 1));
-                                List<num> nonNullValues = tableauNotes.values.where((value) => value != null).map((value) => value!).toList();
-                                const storage = FlutterSecureStorage();
-                                await storage.write(key: "notes", value: nonNullValues.toString());
-                                setState(() {
-                                  isShowMO = true;
-                                  listNotes = nonNullValues;
-                                });
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(padding: EdgeInsets.zero),
-                            child: const SizedBox(height: 40, width: 160, child: Center(child: Text("Calculer",style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold))),
-                          ),),
-                          const SizedBox(width: 5,),
-                          Expanded(child: Container(
-                            decoration: BoxDecoration(
-                                color: const Color(0xFF0A1E64),
-                                borderRadius: BorderRadius.circular(10)
-                            ),
-                            child: Center(
-                              child: Text("${isShowMO ? calculerMoyenne(listNotes) : "---" } / 20",style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
-                            ),
-                          )),
-                          const SizedBox(width: 20,),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Divider(),
-              if ( isShowMO ) Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("Votre moyenne d'orientation est : ",style: TextStyle(fontSize: 16),),
-                      Text("${isShowMO ? calculerMoyenne(listNotes) : "---" }/20",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)
-                    ],
                   ),
                   const SizedBox(height: 5,),
-                  ResultatSimulateurBEPC(moBEPC: double.parse(calculerMoyenne(listNotes)),)
+                  SizedBox(
+                    height: 40,
+                    width: double.infinity,
+                    child: Row(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () async {
+                            tableauNotes["fr1"] = convertStringToNum(fr1Controller.text);
+                            tableauNotes["fr2"] = convertStringToNum(fr2Controller.text);
+                            tableauNotes["ang1"] = convertStringToNum(ang1Controller.text);
+                            tableauNotes["ang2"] = convertStringToNum(ang2Controller.text);
+                            tableauNotes["ang3"] = convertStringToNum(ang3Controller.text);
+                            tableauNotes["maths1"] = convertStringToNum(maths1Controller.text);
+                            tableauNotes["maths2"] = convertStringToNum(maths2Controller.text);
+                            tableauNotes["pc1"] = convertStringToNum(pc1Controller.text);
+                            tableauNotes["pc2"] = convertStringToNum(pc2Controller.text);
+
+                            bool allNotNull = tableauNotes.values.every((value) => value != null);
+                            if (allNotNull) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Calcul ...')),
+                              );
+                              await Future.delayed(const Duration(seconds: 1));
+                              List<num> nonNullValues = tableauNotes.values.where((value) => value != null).map((value) => value!).toList();
+                              const storage = FlutterSecureStorage();
+                              await storage.write(key: "notes", value: nonNullValues.toString());
+                              setState(() {
+                                isShowMO = true;
+                                listNotes = nonNullValues;
+                              });
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(padding: EdgeInsets.zero),
+                          child: const SizedBox(height: 40, width: 160, child: Center(child: Text("Calculer",style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold))),
+                        ),),
+                        const SizedBox(width: 5,),
+                        Expanded(child: Container(
+                          decoration: BoxDecoration(
+                              color: const Color(0xFF0A1E64),
+                              borderRadius: BorderRadius.circular(10)
+                          ),
+                          child: Center(
+                            child: Text("${isShowMO ? calculerMoyenne(listNotes) : "---" } / 20",style: const TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
+                          ),
+                        )),
+                        const SizedBox(width: 20,),
+                      ],
+                    ),
+                  ),
                 ],
-              )
-            ],
-          ),
+              ),
+            ),
+            const Divider(),
+            if ( isShowMO )Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Votre moyenne d'orientation est : ",style: TextStyle(fontSize: 16),),
+                Text("${isShowMO ? calculerMoyenne(listNotes) : "---" }/20",style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)
+              ],
+            )
+          ],
         ),
       ),
-     );
+    );
   }
 
   num? convertStringToNum(String? value) {

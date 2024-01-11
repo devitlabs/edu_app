@@ -32,7 +32,7 @@ class _SubjectScreenState extends State<SubjectScreen> {
               },
               splashRadius: 20,
               padding: EdgeInsets.zero,
-              icon: Icon(Icons.arrow_back)
+              icon: const Icon(Icons.arrow_back)
           ),
           title: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -40,9 +40,9 @@ class _SubjectScreenState extends State<SubjectScreen> {
             children: [
               Text(
                 "${widget.subjectTitle}",
-                style: TextStyle(fontSize: 22),
+                style: const TextStyle(fontSize: 22),
               ),
-              Text(
+              const Text(
                 "10 Membres en ligne",
                 style: TextStyle(fontSize: 16,),
               )
@@ -56,23 +56,23 @@ class _SubjectScreenState extends State<SubjectScreen> {
                 onPressed: () {},
                 splashRadius: 20,
                 padding: EdgeInsets.zero,
-                icon: Icon(Icons.notification_important_rounded)
+                icon: const Icon(Icons.notification_important_rounded)
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             IconButton(
                 onPressed: () {},
                 splashRadius: 20,
                 padding: EdgeInsets.zero,
-                icon: Icon(Icons.more_vert_sharp)
+                icon: const Icon(Icons.more_vert_sharp)
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             )
           ],
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
             ChatWidget(),
             FileWidget(),
@@ -131,12 +131,12 @@ class _ChatWidgetState extends State<ChatWidget> {
               textCapitalization: TextCapitalization.sentences,
               decoration: InputDecoration(
                 suffixIcon: IconButton(
-                  icon: Icon(Icons.send),
+                  icon: const Icon(Icons.send),
                   onPressed: () => _handleSubmitted(_textController.text),
                 ),
                 counterText: '',
                 hintText: 'Envoyer un message...',
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
               ),
               onChanged: (text) => setState(() {}),
             ),
@@ -175,7 +175,7 @@ class _ChatWidgetState extends State<ChatWidget> {
 class ChatMessage extends StatelessWidget {
   final String text;
 
-  ChatMessage({required this.text});
+  const ChatMessage({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -247,7 +247,7 @@ class _FileWidgetState extends State<FileWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(child: Text("Fichiers"),),
+      child: const Center(child: Text("Fichiers"),),
     );
   }
 }
@@ -263,7 +263,7 @@ class _MemberWidgetState extends State<MemberWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
+      child: const Center(
         child: Text("Membres"),
       ),
     );
