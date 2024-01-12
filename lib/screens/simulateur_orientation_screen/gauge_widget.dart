@@ -82,7 +82,7 @@ class _ResultatSimulateurBEPCState extends State<ResultatSimulateurBEPC> {
                 angle: 90,
                 positionFactor: 0.8,
                 widget: Text(
-                  '  ${widget.moBEPC}  ',
+                  '  ${widget.moBEPC.toStringAsFixed(2)}  ',
                   style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.black, fontSize: 20),
                 ),
               )

@@ -50,6 +50,7 @@ class ApiClient  {
                 "password": utilisateur.motPasse,
                 "ville": utilisateur.ville,
                 "email":"kevin.jean@gmail.com",
+                "niveauEtude":utilisateur.classe,
                 "telephone":"+2250700000001",
                 "description": "dggd",
                 "typeUtuliseurFkx": "1",
