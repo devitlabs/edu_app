@@ -132,14 +132,11 @@ class RouteClass {
       final DateTime dateNow = DateTime.now();
       final DateTime? dateExpiration = expiration != null ? DateTime.parse(expiration) : null;
       final path = state.fullPath;
-      print("Date Now ${dateNow.toString()} Expiration ${dateExpiration.toString()}");
 
       bool? isExpired ;
       if (dateExpiration != null ) {
         isExpired = dateNow.isAfter(dateExpiration);
       }
-
-      print("isExpired : $isExpired");
 
       if ( path !=null && path.contains("inscription") ) {
         return null;

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:http/http.dart' as http;
 
@@ -22,7 +23,9 @@ class ApiClient  {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: data,
-      );
+      ).timeout(const Duration(seconds: 10),onTimeout: (){
+        return http.Response("", 404);
+      });
 
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
@@ -35,8 +38,9 @@ class ApiClient  {
     }
   }
 
-  static Future<bool> createUtilisateur({required InscriptionModel utilisateur }) async {
+  static Future<String?> createUtilisateur({required InscriptionModel utilisateur }) async {
     try {
+      String number = Random().nextInt(1000).toString();
       var data = jsonEncode(
           {
             "user":"1",
@@ -49,10 +53,10 @@ class ApiClient  {
                 "login": "${utilisateur.nom?.toLowerCase()}",
                 "password": utilisateur.motPasse,
                 "ville": utilisateur.ville,
-                "email":"kevin.jean@gmail.com",
+                "email":"${utilisateur.nom}.${utilisateur.nom}@gmail.com",
                 "niveauEtude":utilisateur.classe,
-                "telephone":"+2250700000001",
-                "description": "dggd",
+                "telephone":"+225070000${number}",
+                "description": "Pas de description",
                 "typeUtuliseurFkx": "1",
                 "matricule": utilisateur.matricule,
                 "etat": "ETAT",
@@ -67,19 +71,19 @@ class ApiClient  {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: data,
-      );
+      ).timeout(const Duration(seconds: 10));
 
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         if (jsonData["hasError"]) {
-          return false;
+          return null;
         }
-        return true;
+        return null;
       } else {
-        return false;
+        return null;
       }
     } catch (e) {
-      return false;
+      return null;
     }
   }
 

@@ -238,8 +238,8 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                             inscriptionController.inscriptionModel.value.matricule = _matriculeController.text;
                             inscriptionController.inscriptionModel.value.dateNaissance = formatDate(selectedDate);
                             final result = await ApiClient.createUtilisateur(utilisateur: inscriptionController.inscriptionModel.value);
-                            if (result) {
-                              showSucces();
+                            if (result != null ) {
+                              showSucces(result);
                             } else {
                               const snackBar = SnackBar(
                                 backgroundColor: Colors.red,
@@ -290,7 +290,7 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
     return "$day/$month/${date.year}";
   }
 
-  void showSucces() {
+  void showSucces(String result) {
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -310,7 +310,13 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                 Image.asset("assets/images/congrats.png",width: 60,height: 60,),
                 const SizedBox(height: 10),
                 const Text("Félicitions vous faites parti(e)s"),
-                const Text("de la famille 13.Edu"),
+                const Text("de la famille 13.Edu. "),
+                Row(
+                  children: [
+                    Text("Votre login est : "),
+                    Text("${result}",style: TextStyle(fontWeight: FontWeight.bold,color: secondaryColor),),
+                  ],
+                ),
                 const SizedBox(height: 10),
                 TextButton(
                     onPressed: (){
@@ -318,7 +324,7 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
                       selectedDate = null;
                       _matriculeController.clear();
                       inscriptionController.inscriptionModel.value = InscriptionModel.init();
-                      context.go("/login");
+                      context.go("/login",extra: result);
                     },
                     child: const Text("Connectez-vous maintenant"))
               ],
