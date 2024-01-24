@@ -10,7 +10,8 @@ import '../screens/blog_screen/blog_screen.dart';
 import '../screens/home_screen/home_screen.dart';
 import '../screens/inscription_screen/inscription_screen.dart';
 import '../screens/loading_screen/loading_screen.dart';
-import '../screens/simulateur_orientation_screen/simulateur_orientation_screen.dart';
+import '../screens/simulateur_orientation_screen/simulateur_seconde_screen.dart';
+import '../screens/simulateur_orientation_screen/simulateur_screen.dart';
 import '../screens/soutien_screen/soutien_screen.dart';
 import '../screens/splash_screen/splash_screen.dart';
 import '../screens/class_screen/class_screen.dart';
@@ -45,14 +46,22 @@ class RouteClass {
       GoRoute(
         path: '/simulateur-orientation',
         builder: (BuildContext context, GoRouterState state) {
-          return const SimulateurOrientationScreen();
+          return const SimulateurScreen();
         },
+        routes: [
+          GoRoute(
+              path: 'seconde',
+              builder: (BuildContext context, GoRouterState state) {
+                return const OrientationSecondeScreen();
+              }
+          )
+        ]
       ),
       GoRoute(
         path: '/soutien-scolaire',
         builder: (BuildContext context, GoRouterState state) {
           return const SoutienScreen();
-        },
+        }
       ),
       GoRoute(
         path: '/subject/:subjectId',

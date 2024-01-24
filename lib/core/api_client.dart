@@ -40,7 +40,6 @@ class ApiClient  {
 
   static Future<String?> createUtilisateur({required InscriptionModel utilisateur }) async {
     try {
-      String number = Random().nextInt(1000).toString();
       var data = jsonEncode(
           {
             "user":"1",
@@ -50,21 +49,22 @@ class ApiClient  {
                 "prenoms": utilisateur.prenom,
                 "dateNaissance": utilisateur.dateNaissance,
                 "pays": "Côte d'Ivoire",
-                "login": "${utilisateur.nom?.toLowerCase()}",
-                "password": utilisateur.motPasse,
-                "ville": utilisateur.ville,
-                "email":"${utilisateur.nom}.${utilisateur.nom}@gmail.com",
+                "email":utilisateur.email,
                 "niveauEtude":utilisateur.classe,
-                "telephone":"+225070000${number}",
+                "login": utilisateur.login,
+                "password": "${utilisateur.motPasse}",
+                "telephone":utilisateur.numeroTelephone,
+                "ville": utilisateur.ville,
                 "description": "Pas de description",
                 "typeUtuliseurFkx": "1",
                 "matricule": utilisateur.matricule,
                 "etat": "ETAT",
-                "codeProfil": "ADMIN"
+                "codeProfil": utilisateur.typeProfil == "Elève" ? "STANDART_APPRENANT" : "STANDART_FORMATEUR"
               }
             ]
           }
       );
+
       final response = await http.post(
         Uri.parse('$baseUrl/utilisateur/create'),
         headers: <String, String>{
@@ -76,7 +76,7 @@ class ApiClient  {
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
         if (jsonData["hasError"]) {
-          return null;
+          return "${utilisateur.login}";
         }
         return null;
       } else {

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:edu_app/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -7,14 +8,14 @@ import 'package:go_router/go_router.dart';
 
 import 'gauge_widget.dart';
 
-class SimulateurOrientationScreen extends StatefulWidget {
-  const SimulateurOrientationScreen({super.key});
+class OrientationSecondeScreen extends StatefulWidget {
+  const OrientationSecondeScreen({super.key});
 
   @override
-  State<SimulateurOrientationScreen> createState() => _SimulateurOrientationScreenState();
+  State<OrientationSecondeScreen> createState() => _OrientationSecondeScreenState();
 }
 
-class _SimulateurOrientationScreenState extends State<SimulateurOrientationScreen> {
+class _OrientationSecondeScreenState extends State<OrientationSecondeScreen> {
 
   final Map<String,num?> tableauNotes = {
     "fr1":null,
@@ -81,7 +82,7 @@ class _SimulateurOrientationScreenState extends State<SimulateurOrientationScree
         elevation: 0,
         leading: IconButton(icon: const Icon(Icons.arrow_back),
           onPressed: (){
-              context.go("/app-menu/accueil");
+              context.go("/simulateur-orientation");
           },splashRadius: 20,
         ),
         title: const Text("Simulateur d'orientation"),
@@ -89,19 +90,23 @@ class _SimulateurOrientationScreenState extends State<SimulateurOrientationScree
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
-
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text("Moyenne d'orientation",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-                  IconButton(onPressed: (){
-                    setState(() {
-                      isShowMO = false;
-                      listNotes = [];
-                    });
-                  }, icon: const Icon(Icons.refresh),splashRadius: 20,)
+                  Row(
+                    children: [
+                      IconButton(onPressed: (){}, icon: const Icon(Icons.cleaning_services_outlined,color: Colors.red,),splashRadius: 20,),
+                      IconButton(onPressed: (){
+                        setState(() {
+                          isShowMO = false;
+                          listNotes = [];
+                        });
+                      }, icon: const Icon(Icons.refresh,color: Colors.green),splashRadius: 20,)
+                    ],
+                  )
                 ],
               ),
               const SizedBox(height: 10,),
@@ -559,7 +564,7 @@ class _SimulateurOrientationScreenState extends State<SimulateurOrientationScree
                                 borderRadius: BorderRadius.circular(10)
                             ),
                             child: Center(
-                              child: Text("${isShowMO ? calculerMoyenne(listNotes) : "---" } / 20",style: const TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
+                              child: Text("${isShowMO ? calculerMoyenne(listNotes).toStringAsFixed(2) : "---" } / 20",style: const TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.bold),),
                             ),
                           )),
                           const SizedBox(width: 20,),
@@ -575,12 +580,73 @@ class _SimulateurOrientationScreenState extends State<SimulateurOrientationScree
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Votre moyenne d'orientation est : ",style: TextStyle(fontSize: 16),),
-                      Text("${isShowMO ? calculerMoyenne(listNotes).toStringAsFixed(2) : "---" }/20",style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)
+                      const Text("Votre moyenne d'orientation est : ",style: TextStyle(fontSize: 18),),
+                      Text("${isShowMO ? calculerMoyenne(listNotes).toStringAsFixed(2) : "---" }/20",style: const TextStyle(fontSize: 18,fontWeight: FontWeight.bold),)
                     ],
                   ),
                   SizedBox(height: 10,),
-                  ResultatSimulateurBEPC(moBEPC: calculerMoyenne(listNotes).toDouble(),)
+                  ResultatSimulateurBEPC(moBEPC: calculerMoyenne(listNotes).toDouble(),),
+                  Row(
+                    children: [
+                      Image.asset("assets/icons/litteraire.png",width: 20,),
+                      SizedBox(width: 10,),
+                      Text("Bilan Littéraire : ",style: TextStyle(fontSize: 18),),
+                      Text("12 / 20" ,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: primaryColor),)
+                    ],
+                  ),
+                  SizedBox(height: 5,),
+                  Row(
+                    children: [
+                      Image.asset("assets/icons/recherche-scientifique.png",width: 20,),
+                      SizedBox(width: 10,),
+                      Text("Bilan Scientifique : ",style: TextStyle(fontSize: 18)),
+                      Text("08 / 20" ,style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.red,),)
+                    ],
+                  ),
+                  const SizedBox(height: 5,),
+                  const Divider(),
+                  const SizedBox(height: 5,),
+                  Row(
+                    children: [
+                      Image.asset("assets/icons/conseils.png",width: 25),
+                      const SizedBox(width: 10,),
+                      const Text("Conseils",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),)
+                    ],
+                  ),
+                  const SizedBox(height: 5,),
+                  const Column(
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.verified,color: Colors.green,),
+                          SizedBox(width: 5,),
+                          Flexible(child: Text("Vous avez une forte chance d'être orienté en Seconde car votre MO = 12 ≥ 9.5 .",style: TextStyle(
+                            fontSize: 16
+                          ),))
+                        ],
+                      ),
+                      const SizedBox(height: 5,),
+                      Row(
+                        children: [
+                          Icon(Icons.verified,color: Colors.green,),
+                          SizedBox(width: 5,),
+                          Flexible(child: Text("Nous vous conseillons la SERIE C.",style: TextStyle(
+                              fontSize: 16
+                          ),))
+                        ],
+                      ),
+                      const SizedBox(height: 5,),
+                      Row(
+                        children: [
+                          Icon(Icons.verified,color: Colors.green,),
+                          SizedBox(width: 5,),
+                          Flexible(child: Text("Votre MO = 15 ≥  14. Ce qui signifie que vous êtes probablement un futur boursier.",style: TextStyle(
+                              fontSize: 16
+                          ),))
+                        ],
+                      ),
+                    ],
+                  )
                 ],
               )
             ],

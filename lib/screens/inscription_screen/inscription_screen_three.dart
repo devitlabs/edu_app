@@ -29,6 +29,7 @@ class _InscriptionScreenThreeState extends State<InscriptionScreenThree> {
 
   @override
   void initState() {
+
     _passwordController = TextEditingController();
     _matriculeController = TextEditingController();
     super.initState();

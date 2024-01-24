@@ -96,7 +96,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double hCircle = 150; 
+    double hCircle = 150;
+    final extraString = GoRouterState.of(context).extra.toString();
+    if (extraString != null && extraString !="" && extraString !="null" ) {
+      _loginController.text = extraString;
+    }
     return SafeArea(
       child: Scaffold(
         body: Column(

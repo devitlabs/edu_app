@@ -3,7 +3,9 @@ import 'dart:convert';
 class InscriptionModel {
   String? typeProfil;
   String? nom;
+  String? email;
   String? prenom;
+  String? login;
   String? ville;
   String? numeroTelephone;
   String? classe;
@@ -16,6 +18,8 @@ class InscriptionModel {
   InscriptionModel({
     required this.typeProfil,
     required this.nom,
+    required this.login,
+    required this.email,
     required this.prenom,
     required this.ville,
     required this.numeroTelephone,
@@ -43,6 +47,8 @@ class InscriptionModel {
     dateNaissance: json["dateNaissance"],
     matricule: json["matricule"],
     estPremium: json["estPremium"],
+    login: json["estPremium"],
+    email: json["mail"],
   );
 
   factory InscriptionModel.init() => InscriptionModel(
@@ -57,6 +63,8 @@ class InscriptionModel {
     estPremium: null,
     dateNaissance: null,
     matricule: null,
+    login: null,
+    email: null,
   );
 
   Map<String, dynamic> toJson() => {

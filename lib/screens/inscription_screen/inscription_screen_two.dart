@@ -20,6 +20,7 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
   final a = Random().nextInt(9);
   final b = Random().nextInt(9);
   late final TextEditingController _nomController;
+  late final TextEditingController _emailController;
   late final TextEditingController _prenomController;
   late final TextEditingController _telController;
   late final TextEditingController _etablissementController;
@@ -44,6 +45,7 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
   void initState() {
     final inscriptionModel = inscriptionController.inscriptionModel.value;
     _nomController = TextEditingController(text: inscriptionModel.nom);
+    _emailController = TextEditingController(text: inscriptionModel.email);
     _prenomController = TextEditingController(text: inscriptionModel.prenom);
     _telController = TextEditingController(text: inscriptionModel.numeroTelephone);
     _etablissementController = TextEditingController(text: inscriptionModel.etablissement);
@@ -113,6 +115,31 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                             height: 70,
                             child: TextFormField(
                               validator: (value) {
+                                if (value == null || value.isEmpty || !GetUtils.isEmail(value)) {
+                                  return "Le champ renseigné est incorrect";
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                  hintText: "Email",
+                                  contentPadding: const EdgeInsets.only(
+                                      left: 20.0,
+                                      right: 20.0),
+                                  border: const OutlineInputBorder(),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Theme.of(
+                                              context)
+                                              .primaryColor,
+                                          width: 2))),
+                              controller: _emailController,
+                            ),
+                          ),
+                          const SizedBox(height: 4,),
+                          SizedBox(
+                            height: 70,
+                            child: TextFormField(
+                              validator: (value) {
                                 if (value == null || value.isEmpty || value.length < 3) {
                                   return "Le champ renseigné est incorrect";
                                 }
@@ -134,7 +161,7 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                               onChanged: (value){
                                 setState(() {
                                   setState(() {
-                                    login = "$value$a$b";
+                                    login = "$value$a$b".toLowerCase();
                                   });
                                 });
                               },
@@ -293,6 +320,8 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                               onPressed: (){
                                 if (_formKey.currentState!.validate() && _btnClasse != null ) {
                                   inscriptionController.inscriptionModel.value.nom = _nomController.text;
+                                  inscriptionController.inscriptionModel.value.login = login;
+                                  inscriptionController.inscriptionModel.value.email = _emailController.text;
                                   inscriptionController.inscriptionModel.value.prenom = _prenomController.text;
                                   inscriptionController.inscriptionModel.value.ville = _villeController.text;
                                   inscriptionController.inscriptionModel.value.numeroTelephone = _telController.text;
