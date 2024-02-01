@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../controllers/auth_controller.dart';
 import '../../models/user_model.dart';
 import '../../widgets/header_curved_container.dart';
