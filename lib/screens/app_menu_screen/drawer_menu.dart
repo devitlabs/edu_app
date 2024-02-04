@@ -50,7 +50,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("${_user.nom} ${_user.prenoms}",style: const TextStyle(fontSize: 16,color: Colors.white),),
+                    Text("${_user.userInfos["nom"]} ${_user.userInfos["prenoms"]}",style: const TextStyle(fontSize: 16,color: Colors.white),),
                     const SizedBox(height: 5,),
                     const Text("+225 0757360442 ",style: TextStyle(color: Colors.white)),
                     const SizedBox(height: 5,),
@@ -97,7 +97,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
             child: OutlinedButton(
               onPressed: () async {
                 const storage = FlutterSecureStorage();
-                authController.user.value = UserModel.init();
+                authController.user.value = UserModel(userInfos: {});
                 await storage.deleteAll();
                 context.go("/login");
               },

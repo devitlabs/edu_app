@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../controllers/inscription_controller.dart';
+import '../../core/api_client.dart';
+import '../../models/inscription_model.dart';
 
 class InscriptionScreenTwo extends StatefulWidget {
   const InscriptionScreenTwo({super.key});
@@ -17,40 +19,46 @@ class InscriptionScreenTwo extends StatefulWidget {
 class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
 
   String? login;
+  bool checkPremium = false;
+  bool isShowPassword = true;
+  String? motPasse ;
   final a = Random().nextInt(9);
   final b = Random().nextInt(9);
+  final c = Random().nextInt(9);
+  final d = Random().nextInt(9);
   late final TextEditingController _nomController;
   late final TextEditingController _emailController;
   late final TextEditingController _prenomController;
-  late final TextEditingController _telController;
-  late final TextEditingController _etablissementController;
-  late final TextEditingController _villeController;
+  late final TextEditingController _matriculeController;
+
   String? _btnClasse;
 
 
-  static const menuItemsClasse  = <String>['6ème', '5ème', '4ème', '3ème',
-                                            '2nde', '1ère', 'Tle'];
+  static const menuItemsClasse  = <String>['6ème', '5ème', '4ème', '3ème',  '2nde', '1ère', 'Tle'];
+
+  final List<PopupMenuItem<String>> _popUpMenuItemseEleve = menuItemsClasse.map(
+        (String value) => PopupMenuItem<String>(value: value, child: Text(value),),
+  ).toList();
+
+
+  static const menuItemsEncadreur  = <String>['BAC', 'DEUG', 'LICENCE', 'MASTER'];
+
+  final List<PopupMenuItem<String>> _popUpMenuItemsEncadreur = menuItemsEncadreur.map(
+        (String value) => PopupMenuItem<String>(value: value, child: Text(value),),
+  ).toList();
+
 
   final InscriptionController inscriptionController = Get.find();
-
-  final List<PopupMenuItem<String>> _popUpMenuItemsClasse = menuItemsClasse
-      .map((String value) => PopupMenuItem<String>(value: value, child: Text(value),
-    ),
-  )
-      .toList();
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
-    final inscriptionModel = inscriptionController.inscriptionModel.value;
-    _nomController = TextEditingController(text: inscriptionModel.nom);
-    _emailController = TextEditingController(text: inscriptionModel.email);
-    _prenomController = TextEditingController(text: inscriptionModel.prenom);
-    _telController = TextEditingController(text: inscriptionModel.numeroTelephone);
-    _etablissementController = TextEditingController(text: inscriptionModel.etablissement);
-    _villeController = TextEditingController(text: inscriptionModel.ville);
-    _btnClasse = inscriptionModel.classe;
+    motPasse = genererMotDePasse();
+    _nomController = TextEditingController();
+    _emailController = TextEditingController();
+    _prenomController = TextEditingController();
+    _matriculeController = TextEditingController();
     super.initState();
   }
 
@@ -161,7 +169,7 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                               onChanged: (value){
                                 setState(() {
                                   setState(() {
-                                    login = "$value$a$b".toLowerCase();
+                                    login = "$value$a$b$c$d".toLowerCase();
                                   });
                                 });
                               },
@@ -179,7 +187,7 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 20.0),
                               child: Text(
-                                "$login",
+                                "Login : $login",
                                 style: const TextStyle(fontSize: 18,color: secondaryColor,fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -215,14 +223,14 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                             child: TextFormField(
                               maxLength: 10,
                               validator: (value) {
-                                if (value == null || value.isEmpty || value.length < 4) {
+                                if (value == null || value.isEmpty || value.length < 9) {
                                   return "Le champ renseigné est incorrect";
                                 }
                                 return null;
                               },
                               decoration: InputDecoration(
                                  counterText: "",
-                                  hintText: "Ville",
+                                  hintText: "Matricule",
                                   contentPadding: const EdgeInsets.only(
                                       left: 20.0,
                                       right: 20.0),
@@ -233,34 +241,7 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                                               context)
                                               .primaryColor,
                                           width: 2))),
-                              controller: _villeController,
-                            ),
-                          ),
-                          const SizedBox(height: 5,),
-                          SizedBox(
-                            height: 70,
-                            child: TextFormField(
-                              maxLength: 10,
-                              keyboardType: TextInputType.number,
-                              validator: (value) {
-                                if (value == null || value.isEmpty || value.length != 10) {
-                                  return "Le champ renseigné est incorrect";
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                  hintText: "Numéro Tel",
-                                  contentPadding: const EdgeInsets.only(
-                                      left: 20.0,
-                                      right: 20.0),
-                                  border: const OutlineInputBorder(),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Theme.of(
-                                              context)
-                                              .primaryColor,
-                                          width: 2))),
-                              controller: _telController,
+                              controller: _matriculeController,
                             ),
                           ),
                           const SizedBox(height: 5,),
@@ -276,7 +257,7 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Text(_btnClasse??"Classe",style: const TextStyle(color: Color(0xFF646464)),),
+                                Text(_btnClasse??"Niveau d'étude",style: const TextStyle(color: Color(0xFF646464),fontSize: 18)),
                                 PopupMenuButton<String>(
                                   padding: EdgeInsets.zero,
                                   icon: const Icon(Icons.arrow_drop_down_outlined,color: Color(0xFF646464),size: 40,),
@@ -285,52 +266,89 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
                                       _btnClasse = newValue;
                                     });
                                   },
-                                  itemBuilder: (BuildContext context) => _popUpMenuItemsClasse,
-                                ),
+                                  itemBuilder: (BuildContext context) =>
+                                  inscriptionController.inscriptionModel.value.typeProfil == "Elève" ?  _popUpMenuItemseEleve : _popUpMenuItemsEncadreur                                ),
                               ],
                             ),
                           ),
                           const SizedBox(height: 15,),
-                          SizedBox(
-                            height: 70,
-                            child: TextFormField(
-                              validator: (value) {
-                                if (value == null || value.isEmpty || value.length <  8) {
-                                  return "Le champ renseigné est incorrect";
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                  hintText: "Etablissement",
-                                  contentPadding: const EdgeInsets.only(
-                                      left: 20.0,
-                                      right: 20.0),
-                                  border: const OutlineInputBorder(),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Theme.of(
-                                              context)
-                                              .primaryColor,
-                                          width: 2))),
-                              controller: _etablissementController,
+                          Container(
+                            width: double.infinity,
+                            height: 50,
+                            alignment: Alignment.centerLeft,
+                            decoration: BoxDecoration(
+                                color: Colors.grey.withOpacity(0.5),
+                                borderRadius: BorderRadius.circular(10)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 20.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      const Text(
+                                        "Mot de passe : ",
+                                        style: TextStyle(fontSize: 18,color: secondaryColor,fontWeight: FontWeight.bold),
+                                      ),
+                                      SelectableText(
+                                        "${ isShowPassword ? motPasse : "**********" }",
+                                        style: const TextStyle(fontSize: 18,color: secondaryColor,fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                  IconButton(splashRadius: 20,onPressed: (){
+                                    setState(() {
+                                      isShowPassword = !isShowPassword;
+                                    });
+                                  }, icon: const Icon(Icons.visibility_sharp))
+                                ],
+                              ),
                             ),
                           ),
+                          const SizedBox(height: 15,),
+                          Row(
+                            children: [
+                              Checkbox(value: checkPremium,splashRadius: 10, onChanged: (value){
+                                if (value != null ) {
+                                  setState(() {
+                                    checkPremium = value;
+                                  });
+                                }
+                              },activeColor: secondaryColor,),
+                              const SizedBox(width: 10,),
+                              const Text("Abonnement Premium",style: TextStyle(color: secondaryColor),)
+                            ],
+                          ),
                           const SizedBox(height: 5,),
-                          OutlinedButton(
-                              onPressed: (){
-                                if (_formKey.currentState!.validate() && _btnClasse != null ) {
-                                  inscriptionController.inscriptionModel.value.nom = _nomController.text;
-                                  inscriptionController.inscriptionModel.value.login = login;
-                                  inscriptionController.inscriptionModel.value.email = _emailController.text;
-                                  inscriptionController.inscriptionModel.value.prenom = _prenomController.text;
-                                  inscriptionController.inscriptionModel.value.ville = _villeController.text;
-                                  inscriptionController.inscriptionModel.value.numeroTelephone = _telController.text;
-                                  inscriptionController.inscriptionModel.value.classe = _btnClasse;
-                                  inscriptionController.inscriptionModel.value.etablissement = _etablissementController.text;
-                                  context.go("/inscription/step-3");
+                          ElevatedButton(
+                              onPressed: () async {
+                                if (_formKey.currentState!.validate() && _btnClasse !=null ) {
+                                  final utulisateur = inscriptionController.inscriptionModel.value ;
+                                  utulisateur.email = _emailController.text;
+                                  utulisateur.nom = _nomController.text;
+                                  utulisateur.prenom = _prenomController.text;
+                                  utulisateur.matricule = _matriculeController.text;
+                                  utulisateur.estPremium = checkPremium;
+                                  utulisateur.login =  login;
+                                  utulisateur.motPasse =  motPasse;
+                                  utulisateur.classe =  _btnClasse;
+                                  print(utulisateur.toJson());
+
+                                  final result = await ApiClient.createUtilisateur(utilisateur: utulisateur);
+                                  if (result != null ) {
+                                    showSucces(result);
+                                  } else {
+                                    const snackBar = SnackBar(
+                                      backgroundColor: Colors.red,
+                                      content: Text("Une erreur est survenue lors de la création de votre compte."),
+                                      duration: Duration(seconds: 3), // Set the duration for the SnackBar
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                  }
                                 }
                               },
-                              child: const SizedBox(height: 40, width: double.infinity, child: Center(child: Text("Suivant",style: TextStyle(fontSize: 16),)),
+                              child: const SizedBox(height: 40, width: double.infinity, child: Center(child: Text("Soumettre",style: TextStyle(fontSize: 16),)),
                               )),
                           const SizedBox(height: 10,)
                         ],
@@ -342,6 +360,73 @@ class _InscriptionScreenTwoState extends State<InscriptionScreenTwo> {
           ),
         ),
       ),
+    );
+  }
+
+  String genererMotDePasse() {
+    Random random = Random();
+
+    String majuscule = String.fromCharCode(random.nextInt(26) + 65);
+
+    // Générer deux chiffres aléatoires
+    String chiffre1 = random.nextInt(10).toString();
+    String chiffre2 = random.nextInt(10).toString();
+
+    // Générer cinq lettres minuscules aléatoires
+    String minuscules = '';
+    for (int i = 0; i < 5; i++) {
+      minuscules += String.fromCharCode(random.nextInt(26) + 97);
+    }
+
+    // Concaténer les éléments générés pour former le mot de passe
+    String motDePasse = '$majuscule$chiffre1$chiffre2$minuscules';
+
+    return motDePasse;
+  }
+
+  void showSucces(String result) {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20)
+          ),
+          content: Container(
+            width: 270,
+            height: 200,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20)
+            ),
+            child: Column(
+              children: [
+                const SizedBox(height: 10),
+                Image.asset("assets/images/congrats.png",width: 60,height: 60,),
+                const SizedBox(height: 10),
+                const Text("Félicitions vous faites parti(e)s"),
+                const Text("de la famille 13.Edu. "),
+
+                Row(
+                  children: [
+                    Text("Votre login est : "),
+                    Text("${result}",style: TextStyle(fontWeight: FontWeight.bold,color: secondaryColor),),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                TextButton(
+                    onPressed: (){
+                      _nomController.clear();
+                      _prenomController.clear();
+                      _emailController.clear();
+                      _matriculeController.clear();
+                      inscriptionController.inscriptionModel.value = InscriptionModel.init();
+                      context.go("/login",extra: result);
+                    },
+                    child: const Text("Connectez-vous maintenant"))
+              ],
+            ),
+          ),
+        )
     );
   }
 }

@@ -29,6 +29,7 @@ class ApiClient  {
 
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
+        print(jsonData);
         return jsonData;
       } else {
         return null;
@@ -47,14 +48,14 @@ class ApiClient  {
               {
                 "nom": utilisateur.nom,
                 "prenoms": utilisateur.prenom,
-                "dateNaissance": utilisateur.dateNaissance,
+                "dateNaissance": "01/01/1900",
                 "pays": "Côte d'Ivoire",
                 "email":utilisateur.email,
-                "niveauEtude":utilisateur.classe,
+                "niveauEtude": "${utilisateur.classe}",
                 "login": utilisateur.login,
                 "password": "${utilisateur.motPasse}",
-                "telephone":utilisateur.numeroTelephone,
-                "ville": utilisateur.ville,
+                "telephone": "vide",
+                "ville": "vide",
                 "description": "Pas de description",
                 "typeUtuliseurFkx": "1",
                 "matricule": utilisateur.matricule,
@@ -75,7 +76,8 @@ class ApiClient  {
 
       if (response.statusCode == 200) {
         final jsonData = jsonDecode(response.body);
-        if (jsonData["hasError"]) {
+        print(jsonData);
+        if ( ! jsonData["hasError"]) {
           return "${utilisateur.login}";
         }
         return null;

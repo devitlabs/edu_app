@@ -13,15 +13,13 @@ class _ClassScreenState extends State<ClassScreen> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(8),
-      child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child:  Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text("Salle de classe : 3ième ",style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
-          SizedBox(height: 5,),
-          SubjectWidget(title: 'Mathématiques',color: Colors.amber,),
-          SubjectWidget(title: 'Subejct 2',color: Colors.blue,),
-          SubjectWidget(title: 'Subejct 3',color: Colors.green,),
-          SubjectWidget(title: 'Subejct 4',color: Colors.red,),
+          Image.asset("assets/icons/indisponible.png",width: 80,height: 80,),
+          SizedBox(height: 20,),
+          Text("Cette fonctionnalité n'est pas encore implementé.")
         ],
       ),
     );

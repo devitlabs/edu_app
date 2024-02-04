@@ -30,7 +30,7 @@ class _AppMenuScreenState extends State<AppMenuScreen> {
   final AuthController authController = Get.put(AuthController());
 
   void initUser() async {
-    if (authController.user.value.login != null ) {
+    if (authController.user.value.userInfos["login"] != null ) {
       return ;
     }
     const storage = FlutterSecureStorage();
@@ -38,7 +38,7 @@ class _AppMenuScreenState extends State<AppMenuScreen> {
     final password = await storage.read(key: "motPasse");
     final result = await ApiClient.login(login: login!, password: password!);
     if (result != null && result["hasError"] != true ) {
-      authController.user.value = UserModel.fromJson(result["items"][0]);
+      authController.user.value = UserModel(userInfos :result["items"][0]);
     }
   }
 

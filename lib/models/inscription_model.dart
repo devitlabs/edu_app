@@ -76,6 +76,7 @@ class InscriptionModel {
     "classe": classe,
     "etablissement": etablissement,
     "motPasse": motPasse,
+    "login": login,
     "dateNaissance": dateNaissance,
     "matricule": matricule,
     "estPremium": estPremium,

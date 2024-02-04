@@ -1,4 +1,3 @@
-import 'package:edu_app/screens/inscription_screen/inscription_screen_three.dart';
 import 'package:edu_app/screens/inscription_screen/inscription_screen_two.dart';
 import 'package:edu_app/screens/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -123,12 +122,6 @@ class RouteClass {
               path: 'step-2',
               builder: (BuildContext context, GoRouterState state) {
                 return const InscriptionScreenTwo();
-              }
-          ),
-          GoRoute(
-              path: 'step-3',
-              builder: (BuildContext context, GoRouterState state) {
-                return const InscriptionScreenThree();
               }
           ),
         ]

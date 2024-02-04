@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
         final message = result["status"]["message"];
         _showErrorDialog(context,message);
       } else {
-        authController.user.value = UserModel.fromJson(result["items"][0]);
+        authController.user.value = UserModel(userInfos :result["items"][0]);
         DateTime date = DateTime.now();
         DateTime futureTime = date.add(const Duration(minutes: 25));
 
