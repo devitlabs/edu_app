@@ -19,17 +19,22 @@ class AppMenuScreen extends StatefulWidget {
 class _AppMenuScreenState extends State<AppMenuScreen> {
 
   int _currentIndex = 0;
-  final listIndexName = ["accueil","classe","resultats"];
+  final listIndexName = ["accueil","classes","bibliotheque","informations","simulateurs"];
+
+  String? _index;
 
   final _kBottomNavItems = <BottomNavigationBarItem>[
     const BottomNavigationBarItem(icon: Icon(Icons.home),label: "Accueil"),
-    const BottomNavigationBarItem(icon: Icon(Icons.table_chart_rounded),label: "Ma Classe"),
-    const BottomNavigationBarItem(icon: Icon(Icons.book_outlined),label: "Livret Scolaire"),
+    const BottomNavigationBarItem(icon: Icon(Icons.table_chart_rounded),label: "Classes"),
+    const BottomNavigationBarItem(icon: Icon(Icons.book_outlined),label: "Bibliothèque"),
+    const BottomNavigationBarItem(icon: Icon(Icons.newspaper_outlined),label: "Informations"),
+    const BottomNavigationBarItem(icon: Icon(Icons.calculate_outlined),label: "Simulateurs"),
   ];
 
   final AuthController authController = Get.put(AuthController());
 
   void initUser() async {
+
     if (authController.user.value.userInfos["login"] != null ) {
       return ;
     }
@@ -40,7 +45,10 @@ class _AppMenuScreenState extends State<AppMenuScreen> {
     if (result != null && result["hasError"] != true ) {
       authController.user.value = UserModel(userInfos :result["items"][0]);
     }
+
   }
+
+
 
   @override
   void initState() {
@@ -54,9 +62,11 @@ class _AppMenuScreenState extends State<AppMenuScreen> {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        title: const Text("13.Edu"),
+        title: Text("13.Edu"),
         actions: [
-          IconButton(onPressed: (){}, icon: const Icon(Icons.notifications,size: 25,),splashRadius: 20,padding: EdgeInsets.zero,)
+          IconButton(onPressed: (){
+            context.go("/notifications");
+          }, icon: const Icon(Icons.notifications,size: 25,),splashRadius: 20,padding: EdgeInsets.zero,)
         ],
       ),
       drawer: const Drawer(
@@ -65,6 +75,8 @@ class _AppMenuScreenState extends State<AppMenuScreen> {
       body: widget.child,
       bottomNavigationBar: BottomNavigationBar(
         items: _kBottomNavItems,
+        selectedFontSize: 10,
+        unselectedFontSize: 10,
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
         onTap: (int index){

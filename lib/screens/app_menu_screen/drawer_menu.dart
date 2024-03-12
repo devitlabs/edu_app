@@ -73,11 +73,11 @@ class _DrawerMenuState extends State<DrawerMenu> {
           ),
           ListTile(
             minVerticalPadding: 5,
-            leading: const Icon(Icons.book,size: 40,color: primaryColor,),
+            leading: const Icon(Icons.calendar_month,size: 40,color: primaryColor,),
             onTap: () async {
-              context.go("/blog");
+              //context.go("/emploi-du-temps");
             },
-            title: Text("Blog",style: TextStyle(fontSize: 20,color: const Color(0xFF000000).withOpacity(0.7)),),
+            title: Text("Emploi du temps",style: TextStyle(fontSize: 20,color: const Color(0xFF000000).withOpacity(0.7)),),
           ),
           const Divider(),
           ListTile(

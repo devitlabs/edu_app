@@ -5,10 +5,11 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:go_router/go_router.dart';
 
 import '../screens/app_menu_screen/app_menu_screen.dart';
-import '../screens/blog_screen/blog_screen.dart';
 import '../screens/home_screen/home_screen.dart';
+import '../screens/infos_screen/infos_screen.dart';
 import '../screens/inscription_screen/inscription_screen.dart';
 import '../screens/loading_screen/loading_screen.dart';
+import '../screens/notifications_screen/notifications_screen.dart';
 import '../screens/simulateur_orientation_screen/simulateur_seconde_screen.dart';
 import '../screens/simulateur_orientation_screen/simulateur_screen.dart';
 import '../screens/soutien_screen/soutien_screen.dart';
@@ -37,36 +38,28 @@ class RouteClass {
         },
       ),
       GoRoute(
-        path: '/blog',
-        builder: (BuildContext context, GoRouterState state) {
-          return const BlogScreen();
-        },
-      ),
-      GoRoute(
-        path: '/simulateur-orientation',
-        builder: (BuildContext context, GoRouterState state) {
-          return const SimulateurScreen();
-        },
-        routes: [
-          GoRoute(
-              path: 'seconde',
-              builder: (BuildContext context, GoRouterState state) {
-                return const OrientationSecondeScreen();
-              }
-          )
-        ]
-      ),
-      GoRoute(
         path: '/soutien-scolaire',
         builder: (BuildContext context, GoRouterState state) {
           return const SoutienScreen();
         }
       ),
       GoRoute(
+          path: '/notifications',
+          builder: (BuildContext context, GoRouterState state) {
+            return const NotificationsScreen();
+          }
+      ),
+      GoRoute(
         path: '/subject/:subjectId',
         builder: (BuildContext context, GoRouterState state) {
           return SubjectScreen(subjectTitle: state.pathParameters['subjectId'],);
         },
+      ),
+      GoRoute(
+          path: '/simulateur-seconde',
+          builder: (BuildContext context, GoRouterState state) {
+            return const OrientationSecondeScreen();
+          }
       ),
       GoRoute(
         path: '/app-menu',
@@ -88,26 +81,38 @@ class RouteClass {
                 ),
               ),
               GoRoute(
-                path: 'classe',
+                path: 'classes',
                 pageBuilder: (context, state) => NoTransitionPage<void>(
                     key: state.pageKey,
                     child: const ClassScreen()
                 ),
               ),
               GoRoute(
-                path: 'resultats',
+                path: 'bibliotheque',
                 pageBuilder: (context, state) => NoTransitionPage<void>(
                     key: state.pageKey,
-                    child: const Center(child: Text("Résultats"))
+                    child: const Center(child: Text("Bibliothèque"))
                 ),
+              ),
+             GoRoute(
+                path: 'informations',
+                builder: (BuildContext context, GoRouterState state) {
+                  return const InfosScreen();
+                },
               ),
               GoRoute(
-                path: 'soutien',
+                  path: 'simulateurs',
+                  builder: (BuildContext context, GoRouterState state) {
+                    return const SimulateurScreen();
+                  },
+              ),
+              /*GoRoute(
+                path: 'simulateurs',
                 pageBuilder: (context, state) => NoTransitionPage<void>(
                     key: state.pageKey,
-                    child: const Center(child: Text("Soutien"))
+                    child: const Center(child: Text("Simulateurs"))
                 ),
-              ),
+              ),*/
             ],
           ),
         ]

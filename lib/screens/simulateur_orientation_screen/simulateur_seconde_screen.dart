@@ -81,11 +81,11 @@ class _OrientationSecondeScreenState extends State<OrientationSecondeScreen> {
       appBar: AppBar(
         elevation: 0,
         leading: IconButton(icon: const Icon(Icons.arrow_back),
-          onPressed: (){
-              context.go("/simulateur-orientation");
+          onPressed: () async {
+            context.go("/app-menu/accueil");
           },splashRadius: 20,
         ),
-        title: const Text("Simulateur d'orientation"),
+        title: const Text("Orientation en Seconde A/C"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

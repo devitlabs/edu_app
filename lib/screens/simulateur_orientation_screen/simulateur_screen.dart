@@ -12,17 +12,7 @@ class SimulateurScreen extends StatefulWidget {
 class _SimulateurScreenState extends State<SimulateurScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        leading: IconButton(icon: const Icon(Icons.arrow_back),
-          onPressed: (){
-            context.go("/app-menu/accueil");
-          },splashRadius: 20,
-        ),
-        title: const Text("Simulateur d'orientation"),
-      ),
-      body: Padding(
+    return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -35,7 +25,7 @@ class _SimulateurScreenState extends State<SimulateurScreen> {
                   Expanded(
                     child: InkWell(
                       onTap: (){
-                        context.go("/simulateur-orientation/seconde");
+                        context.go("/simulateur-seconde");
                       },
                       borderRadius: BorderRadius.circular(20),
                       child: Container(
@@ -83,7 +73,6 @@ class _SimulateurScreenState extends State<SimulateurScreen> {
             )
           ],
         ),
-      ),
     );
   }
 }

@@ -22,18 +22,18 @@ class _HomeScreenState extends State<HomeScreen> {
               width: double.infinity,
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                  color: const Color(0xFF7D9BDF),
+                  color: const Color(0xFFB0D8FF),
                 borderRadius: BorderRadius.circular(10)
               ),
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Bienvenue dans 13.Edu",style: TextStyle(color: Colors.black,fontSize: 18),),
+                  Text("Bienvenue dans 13.Edu",style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),),
                   SizedBox(height: 5,),
                   Text("13 Edu est une application permettant aux élèves d'avoir un suivi par leurs encadreurs. "
                       "Vous y trouverez également de nombreuses ressources pour vous orienter au mieux dans vos études.",
-                  style: TextStyle(color: Colors.black,fontSize: 14,fontStyle: FontStyle.italic),)
+                  style: TextStyle(color: Colors.black,fontSize: 13,fontStyle: FontStyle.italic),)
                 ],
               ),
             ),
@@ -62,11 +62,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     image: "assets/icons/calculatrice.png",
                   ),
                   HomeButton(
-                    name: "Blog",
+                    name: "Informations",
                     onTap: (){
-                      context.go("/blog");
+                      context.go("/informations");
                     },
-                    image: "assets/icons/bloguer.png",
+                    image: "assets/icons/information.png",
                   ),
                   HomeButton(
                     name: "Soutien",
